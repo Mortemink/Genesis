@@ -474,10 +474,6 @@ ul li button {
   font-weight: 600;
 }
 
-
-
-
-
 .img_1 {
   position: absolute;
   right: 15px;
@@ -518,7 +514,7 @@ footer img {
   opacity: .5;
 }
 
-footer div {
+.copyR {
   position: absolute;
   z-index: 40;
   background-color: #2b2b2b;
@@ -532,3 +528,40 @@ footer div {
   align-items: center;
   bottom: 0;
 }
+
+.location{
+  z-index: 857;
+  position: absolute;
+  color: white;
+  padding: 15px;
+  background-color: #232323;
+  border: 2px solid #de5555;
+  border-radius: 15px;
+  font-family: Georgia;
+  font-weight: 600;
+  top: 230px;
+  right: 220px;
+}
+
+.menuBTN{
+  bottom: 15px;
+  right: 15px;
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  z-index: 5000;
+  background: linear-gradient(to top, #de5555, #dd7070);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* color: white; */
+  font-family: russo one;
+  font-weight: 600;
+  font-size: 28px;
+  box-shadow: 0px 0px 20px 2px rgba(207, 69, 69, 0.5);
+  cursor: pointer;
+}
+
+
+
