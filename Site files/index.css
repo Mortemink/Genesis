@@ -11,8 +11,6 @@
 }
 
 body {
-  width: 100%;
-  height: 5670px;
   background-color: #2b2b2b;
   overflow-x: hidden;
 }
@@ -178,7 +176,7 @@ ul li button {
 }
 
 .button-container .button:before {
-  content: "";
+  content: " ";
   position: absolute;
   top: 50%;
   left: 50%;
@@ -197,8 +195,6 @@ ul li button {
 .button-container .button:nth-child(2) {
   float: right;
 }
-
-/* end of slider */
 
 /* info in slider */
 
@@ -256,12 +252,11 @@ ul li button {
   height: 1000px;
   width: 100%;
   display: flex;
-  justify-content: space-around;
   align-items: center;
   flex-direction: row;
 }
 
-.fourthBG form{
+.fourthBG form {
   display: flex;
   /* justify-content: center; */
   align-items: center;
@@ -271,8 +266,262 @@ ul li button {
   width: 650px;
   height: 870px;
   border-radius: 20px;
+  position: absolute;
+  right: 12%;
+  border: 2px solid #de5555;
 }
 
-.fourthBG p{
+.fillout {
+  position: absolute;
+  top: 30px;
+  color: #de5555;
+  font-size: 46px;
+  font-family: Georgia;
+  font-weight: 600;
+}
+
+.service {
+  font-size: 34px;
+  font-family: Georgia;
+  font-weight: 600;
+  position: absolute;
+  top: 150px;
+  color: #ffffff;
+  left: 6%;
+}
+
+.service span {
+  font-size: 60px;
+  font-family: Georgia;
+  font-weight: 700;
+  color: #de5555;
+  left: 20%;
+}
+
+.inputs {
+  position: absolute;
+  top: 120px;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  /* flex-direction: column; */
+}
+
+.inputs div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.inputs div p {
+  font-size: 28px;
+  font-family: Georgia;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 8px;
+
+}
+
+.inputs div input {
+  background-color: initial;
+  border-radius: 10px;
+  width: 330px;
+  height: 40px;
+  border: 2px solid #de5555;
+  margin-bottom: 40px;
+  color: white;
+  text-align: center;
+  font-size: 18px;
+  font-family: Georgia;
+  font-weight: 100;
+}
+
+.inputs div select {
+  background-color: initial;
+  border-radius: 10px;
+  width: 330px;
+  height: 40px;
+  border: 2px solid #de5555;
+  margin-bottom: 40px;
+  color: white;
+  font-family: Georgia;
+  font-weight: 100;
+  text-align: center;
+  font-size: 18px;
+}
+
+.inputs div select option {
+  font-size: 18px;
+  font-family: Georgia;
+  font-weight: 100;
+  color: white;
+  background-color: #232323;
+}
+
+.fourthBG button {
+  position: absolute;
+  bottom: 50px;
+  width: 200px;
+  height: 80px;
+  border-radius: 20px;
+  border: 2px solid #de5555;
+  background-color: #232323;
+  color: rgb(77, 77, 77);
+  font-size: 24px;
+  font-family: Georgia;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.fourthBG button:hover {
+  border-radius: 50px;
+  background-color: #de5555;
+  color: #fff;
+  font-size: 28px;
+  font-family: Georgia;
+  font-weight: 600;
+}
+
+.fifthBG {
   position: relative;
+  height: 1000px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.offer {
+  position: relative;
+  width: 1540px;
+  height: 880px;
+  background-color: #232323;
+  border: 3px solid #de5555;
+  border-radius: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.infoAP {
+  top: 150px;
+  left: 3%;
+  height: 55%;
+  width: 55%;
+  position: absolute;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.infoAP p {
+  color: white;
+  font-family: Georgia;
+  font-weight: 600;
+  position: absolute;
+}
+
+.infoAP button {
+  left: 40px;
+  bottom: 0;
+  position: absolute;
+  width: 300px;
+  height: 140px;
+  border: none;
+  border-radius: 15px;
+  background: linear-gradient(to top, #de5555, #d36565);
+  box-shadow: 0px 0px 42px 15px rgba(222, 85, 85, 0.2);
+  color: white;
+  font-size: 28px;
+  font-family: Georgia;
+  font-weight: 600;
+}
+
+.prikoli {
+  position: absolute;
+  bottom: 30px;
+  width: 80%;
+  /* background-color: black; */
+  height: 80px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.prikoli div {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  width: 400px;
+  height: 50px;
+}
+
+.prikoli div p {
+  position: relative;
+  margin-top: 34px;
+  margin-left: 15px;
+  color: white;
+  font-family: Georgia;
+  font-weight: 600;
+}
+
+
+
+
+
+.img_1 {
+  position: absolute;
+  right: 15px;
+  top: 100px;
+  z-index: 51;
+  border-left: 3px solid #de5555;
+  border-bottom: 3px solid #de5555;
+  ;
+}
+
+.img_2 {
+  position: absolute;
+  right: 450px;
+  top: 140px;
+  z-index: 48;
+  border-left: 3px solid #de5555;
+  border-bottom: 3px solid #de5555;
+  ;
+}
+
+.img_3 {
+  position: absolute;
+  right: 550px;
+  top: 390px;
+  z-index: 49;
+  border-left: 3px solid #de5555;
+  border-bottom: 3px solid #de5555;
+}
+
+footer {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+footer img {
+  opacity: .5;
+}
+
+footer div {
+  position: absolute;
+  z-index: 40;
+  background-color: #2b2b2b;
+  width: 100%;
+  height: 40px;
+  font-size: 20px;
+  font-family: russo one;
+  color: #6a6a6a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 0;
 }
