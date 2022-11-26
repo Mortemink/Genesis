@@ -424,6 +424,7 @@ ul li button {
 }
 
 .infoAP button {
+  cursor: pointer;
   left: 40px;
   bottom: 0;
   position: absolute;
@@ -431,12 +432,18 @@ ul li button {
   height: 140px;
   border: none;
   border-radius: 15px;
-  background: linear-gradient(to top, #de5555, #d36565);
-  box-shadow: 0px 0px 42px 15px rgba(222, 85, 85, 0.2);
+  background: linear-gradient(to top, #252525, #3f3f3f);
+  box-shadow: 0px 0px 22px 4px rgba(128, 128, 128, 0.2);
   color: white;
   font-size: 28px;
   font-family: Georgia;
   font-weight: 600;
+  transition: 0.3s;
+}
+
+.infoAP button:hover{
+  background: linear-gradient(to top, #de5555, #dd7070);
+  box-shadow: 0px 0px 42px 16px rgba(222, 85, 85, 0.2);
 }
 
 .prikoli {
