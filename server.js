@@ -12,6 +12,7 @@ const session = require('express-session')
 const bodyParser = require("body-parser") 
 const mongoose = require("mongoose")
 const users = require("./models/users")
+const forms = require("./models/forms")
 const methodOverride = require('method-override')
 
 const initializePassport = require('./passport-config')
@@ -96,8 +97,8 @@ async function connectedToDBCheck() {
 
 start();
 
-app.get('/', (req, res) => {
-    res.render('index.ejs')
+app.get('/', async (req, res) => {
+    res.render('index.ejs', { logged: !!(await req.user) })
 })
 
 app.get('/login', checkNotAuthenticated, (req, res) =>{
@@ -151,6 +152,25 @@ app.get('/profile', checkAuthenticated, async (req, res) => {
     const email = user.email
 
     res.render('profile.ejs', { name, lastname, email, number })
+})
+
+app.post('/sendform', checkAuthenticated, async (req, res) => {
+    try {
+        const form = req.body
+        const user = await req.user
+        const newForm = new forms({
+            country: form.country,
+            state: form.state,
+            city: form.city,
+            typeOfService: form.typeofservice,
+            senderEmail: user.email,
+            senderNumber: user.telephone,
+            created: Date.now().toString()
+        })
+        newForm.save()
+    } finally {
+        res.redirect('/')
+    }
 })
 
 function checkAuthenticated(req, res, next) {

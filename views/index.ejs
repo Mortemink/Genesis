@@ -141,34 +141,53 @@
                 We will help you to sell, buy or rent a property.<br>
             </p>
 
-            <form>
+            <form method="POST" action="/sendform">
                 <p class="fillout">Fill out the form</p>
                 <div class="inputs">
                     <div>
                         <p>Counrty</p>
-                        <input name="country">
+                        <% if (logged) { %>
+                            <input name="country" placeholder="example: USA" required> 
+                        <% } else { %>
+                            <input placeholder="You must be logged for text here" disabled> 
+                        <% } %>
                     </div>
                     <div>
                         <p>State</p>
-                        <input name="state">
+                        <% if (logged) { %>
+                            <input name="state" placeholder="example: Ohio" required>
+                        <% } else { %>
+                            <input placeholder="You must be logged for text here" disabled> 
+                        <% } %>
                     </div>
                     <div>
                         <p>City</p>
-                        <input name="city">
+                        <% if (logged) { %>
+                            <input name="city" placeholder="example: Columbus" required>
+                        <% } else { %>
+                            <input placeholder="You must be logged for text here" disabled> 
+                        <% } %>
                     </div>
 
                     <div>
                         <p>Type of service</p>
-                        <select name="typeofservice">
-                            <option>Choose option</option>
-                            <option value="">Sell</option>
-                            <option value="">Purchase</option>
-                            <option value="">Rent</option>
+                        <select name="typeofservice" required <% if (logged == false) { %> disabled <% } %>>
+                            <% if (logged) { %>
+                                <option value="">Choose option</option>
+                            <% } else { %>
+                                <option value="">You must be logged for select</option>
+                            <% } %>
+                            <option value="sell">Sell</option>
+                            <option value="purchase">Purchase</option>
+                            <option value="rent">Rent</option>
                         </select>
                     </div>
                 </div>
-                <!-- <button type="submit">Submit</button> -->
-                <button type="button">Log in</button>
+                <% if (logged) { %>
+                <button type="submit">Submit</button>
+                <% } else { %>
+                <button type="button" onclick="window.location.replace('/login')">Log in</button>
+                <% } %>
             </form>
         </div>
         <div class="fifthBG">
