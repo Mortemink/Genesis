@@ -97,5 +97,5 @@ app.delete('/logout', (req, res) => {
 })
 
 app.listen(3000, () => {
-    console.log('Сайт запущен!')
+    console.log('Ура победа!')
 })
