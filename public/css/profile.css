@@ -103,28 +103,14 @@
     border: none;
   }
 
-  .infoABestate{
+  .infoAboutUser{
     position: absolute;
-    width: 44%;
-    height: 500px;
-    bottom: 25px;
-    left: 80px;
-  }
-
-
-  .infoABestate p{ 
-    font-family: Georgia;
-    font-weight: 600;
-    font-size: 24px;
     color: white;
-}
-
-.infoABestate div{
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    position: absolute;
-}
+    font-family: Georgia;
+   font-weight: 600;
+   font-size: 22px;
+   top: 265px;
+  }
 
 .menuBTN {
     bottom: 15px;
