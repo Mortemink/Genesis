@@ -96,4 +96,6 @@ app.delete('/logout', (req, res) => {
     res.redirect('/')
 })
 
-app.listen(3000)
+app.listen(3000, () => {
+    console.log('Сайт запущен!')
+})
