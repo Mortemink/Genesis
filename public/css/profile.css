@@ -154,12 +154,14 @@ summary {
   user-select: none;
   outline: none;
   transition: transform 200ms ease-in-out 0s;
+  
 }
 summary::before,
 summary::after {
   position: static;
   top: 0;
   left: 0;
+  
 }
 summary::before {
   content: "";

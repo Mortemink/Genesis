@@ -142,6 +142,15 @@ app.post('/register', checkNotAuthenticated,  async (req, res)=>{
     }
 })
 
+app.get('/catalog', async (req, res) => {
+    res.render('catalog.ejs')
+})
+
+app.post('/catalog', async (req, res) => {
+    res.render('catalog.ejs')
+})
+
+
 
 app.get('/profile', checkAuthenticated, async (req, res) => {
     const user = await req.user
