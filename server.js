@@ -99,6 +99,7 @@ start();
 
 app.get('/', async (req, res) => {
     res.render('index.ejs', { logged: !!(await req.user) })
+    
 })
 
 app.get('/login', checkNotAuthenticated, (req, res) =>{
@@ -143,7 +144,7 @@ app.post('/register', checkNotAuthenticated,  async (req, res)=>{
 })
 
 app.get('/catalog', async (req, res) => {
-    res.render('catalog.ejs')
+    res.render('catalog.ejs', { logged: !!(await req.user) })
 })
 
 app.post('/catalog', async (req, res) => {

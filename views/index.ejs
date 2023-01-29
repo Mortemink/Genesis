@@ -8,11 +8,13 @@
     <title>Genesis</title>
     <link rel="stylesheet" href="/css/index.css" type="text/css">
     <script src="/js/smoothScroll.js" type="text/javascript"></script>
+    <script src="/js/headeropacity.js" type="text/javascript"></script>
     <script src="https://kit.fontawesome.com/bba9d51b18.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <header>
+        <div class="header_background" id="querySelectorByClass"></div>
         <div class="headerlinks">
             <ul>
                 <li><button>twitter</button></li>
@@ -21,16 +23,26 @@
                 <li><button>telegram</button></li>
             </ul>
         </div>
-    </header>
-    <main>
         <details>
             <summary></summary>
             <nav class="menu">
               <a href="/">Home</a>
-              <a href="./profile">Profile</a>
+            <% try{%>
+            <% if (logged){%>
+                <a href="./profile">Profile</a>
+            <%} else{%>
+              <a href="./login">Sign In</a>
+            <%}%>
+            <%} catch{%>
+                <a href="./login">Sign In</a>
+            <%}%>
+              <a href="/">Moderation</a>
               <a href="./catalog">Catalog</a>
             </nav>
           </details>
+    </header>
+    <main>
+        
         <div class="mainBG">
             <p
                 style="font-size:36px; font-family: Gaefontly; font-weight: 100; color: #de5555; position: absolute; top: 300px;">
