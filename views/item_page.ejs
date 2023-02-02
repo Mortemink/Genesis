@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title>Advertisement</title>
     <link rel="stylesheet" href="/css/itempage.css" type="text/css">
 </head>
+
 <body>
     <header>
         <div class="logo">
@@ -14,26 +16,62 @@
                 <span>G</span>enesis
             </a>
         </div>
-
-        <button class="add_objective"> Sort by</button>
         <div class="header_background" id="querySelectorByClass"></div>
         <details>
             <summary></summary>
             <nav class="menu">
                 <a href="/">Home</a>
                 <% try{%>
-                <% if (logged){%>
-                <a href="./profile">Profile</a>
-                <%} else{%>
-                <a href="./login">Sign In</a>
-                <%}%>
-                <%} catch{%>
-                <a href="./login">Sign In</a>
-                <%}%>
-                <a href="/">Moderation</a>
-                <a href="./catalog">Catalog</a>
+                    <% if (logged){%>
+                        <a href="./profile">Profile</a>
+                        <%} else{%>
+                            <a href="./login">Sign In</a>
+                            <%}%>
+                                <%} catch{%>
+                                    <a href="./login">Sign In</a>
+                                    <%}%>
+                                        <a href="/">Moderation</a>
+                                        <a href="./catalog">Catalog</a>
             </nav>
         </details>
     </header>
+    <main>
+        <div class="page_block">
+            <div class="add_img_info">
+                <div class="page_slider">
+
+                </div>
+                <div class="page_info">
+                    <div class="name">
+                        <p>Cool house on the riversadasdasdas</p>
+                    </div>
+                    <div class="stats">
+                        <div class="main_info">
+                            <p>Square</p>
+                            <p>Floor</p>
+                            <p>Floor count</p>
+                            <p>Repair</p>
+                            <p>Price</p>
+                        </div>
+                        <div class="main_info_stats">
+                            <p>25</p>
+                            <p>2</p>
+                            <p>1</p>
+                            <p>not required</p>
+                            <p>200000$</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="discription">
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum modi natus eveniet non sequi fuga. Earum optio deserunt eveniet nobis? Quam delectus quidem dolorum rerum consequatur ipsam ipsum ea illum!
+                Commodi minima dicta perspiciatis deleniti. Vel voluptas dolorem unde numquam sunt tenetur non dicta vitae, qui nisi exercitationem quis animi iusto sit, aspernatur ut corrupti ducimus ipsa sequi nam corporis.
+                Unde vel iusto ad iste eligendi quia saepe quidem sit, laborum quisquam dignissimos libero atque, cum deserunt eum veniam voluptatum, omnis quis minima suscipit nostrum eos. Consequatur ipsum eligendi non.
+                Nesciunt reprehenderit iure ratione qui accusantium, molestias animi incidunt, nihil tenetur eum numquam maiores veniam ipsam? Dolores consequatur esse libero nesciunt facilis? Vero totam minima repellat aliquid placeat explicabo iure.
+                Id, nisi possimus. Laboriosam, tempora similique. Quasi harum aliquam corporis! Ullam at dicta cum fugit veritatis labore, similique aperiam itaque enim perferendis ut harum autem perspiciatis, dolorum doloremque ratione. Dolorum!</p>
+            </div>
+        </div>
+    </main>
 </body>
+
 </html>
