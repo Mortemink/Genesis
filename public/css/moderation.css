@@ -1,22 +1,21 @@
 * {
-  margin: 0;
-  padding: 0;
-  -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
-       -moz-user-select: none; /* Old versions of Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome, Edge, Opera and Firefox */
-}
-    
-  body {
-    background-color: #2b2b2b;
-    overflow: hidden;
-    
+    margin: 0;
+    padding: 0;
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Old versions of Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+                                      supported by Chrome, Edge, Opera and Firefox */
   }
-
-   
+  
   A:link {
     text-decoration: none;
     color: white;
@@ -38,89 +37,63 @@
     outline: 0;
     outline-offset: 0;
   }
-
-  .mainBlock{
-    width: 100%;
-    height: 960px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
-
-  .profile{
-    border-radius: 8px;
-    position: absolute;
-    background-color: #232323;
-    border: 2px solid #de5555;
-    width: 80%;
-    height: 900px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
-
-  .profileIMG{
-    border-radius: 50%;
-    position: absolute;
-    width: 190px;
-    height: 190px;
-    background-color: white;
-    top: 60px;
-  }
-
-  .profileInfo{
-    position: absolute;
-    top: 260px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    color: white;
-    font-size: 20px;
-    font-family: Georgia;
-    font-weight: 600;
-  }
-
-  hr{
-    position: absolute;
-    width: 90%;
-    color: #de5555;
-    background-color: #de5555;
-    top: 350px;
-    height: 1px;
-    border: none;
-  }
-
-  .verical{
-    position: absolute;
-    width: 1px;
-    color: #de5555;
-    background-color: #de5555;
-    top: 375px;
-    height: 500px;
-    border: none;
-  }
-
-  .infoAboutUser{
-    position: absolute;
-    color: white;
-    font-family: Georgia;
-   font-weight: 600;
-   font-size: 22px;
-   top: 265px;
-  }
-
   
-/* menu css */
-
-
+  body {
+    background-color: #242424;
+    overflow-x: hidden;
+  }
+  
+  header {
+    position: relative;
+    height: 80px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    z-index: 2;
+    background-color: #272727;
+    box-shadow: 0px 2px 14px #333333;
+  }
+  
+  main {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .logo {
+    color: white;
+    position: absolute;
+    font-size: 35px;
+    font-family: russo one;
+    font-weight: 200;
+    left: 70px;
+  }
+  
+  .logo span {
+    color: #de5555;
+  }
+  
+  .add_objective {
+    position: absolute;
+    left: calc(50% - 75px);
+    background-color: initial;
+    width: 150px;
+    height: 35px;
+    border: 1px solid #de5555;
+    border-radius: 12px;
+    cursor: pointer;
+    color: white;
+    font-family: gaefontly;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
 details {
   z-index: 235235;
   position: absolute;
   right: 70px;
-  top: 50px;
 }
 summary {
   text-align: center;
@@ -224,4 +197,63 @@ details[open]::before {
   }
 }
 
+.item_list {
+    position: relative;
+    height: auto;
+    width: 80%;
+    top: 20px;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
   
+  .item {
+    position: relative;
+    width: 350px;
+    height: 450px;
+    border: 2px solid #de5555;
+    border-radius: 2%;
+    max-height: 450px;
+    max-width: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-left: 20px;
+  }
+  
+  .item {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    overflow: hidden;
+  }
+  
+  .info {
+    bottom: 0;
+    width: 450px;
+    height: 200px;
+    z-index: 515;
+    position: absolute;
+    background-color: #2b2b2b;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  
+  .Titile {
+    position: absolute;
+    top: 10px;
+    font-size: 18px;
+  }
+  
+  .item div p {
+    position: relative;
+    color: white;
+    font-family: Bahnschrift;
+    margin-top: 8px;
+  
+  
+  }

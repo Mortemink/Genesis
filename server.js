@@ -147,6 +147,14 @@ app.get('/item_page', async (req, res) => {
     res.render('item_page.ejs', { logged: !!(await req.user) })
 })
 
+app.get('/moderator_page', async (req, res) => {
+    res.render('moderator_page.ejs', { logged: !!(await req.user) })
+})
+
+app.post('/moderator_page', async(req, res)=>{
+    res.render('moderatior_page.ejs')
+})
+
 app.get('/catalog', async (req, res) => {
     res.render('catalog.ejs', { logged: !!(await req.user) })
 })
