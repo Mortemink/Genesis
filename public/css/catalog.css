@@ -236,6 +236,8 @@ details[open]::before {
   height: 450px;
   border: 2px solid #de5555;
   border-radius: 2%;
+  width: 350px;
+  height: 450px;
   max-height: 450px;
   max-width: 350px;
   display: flex;
@@ -243,11 +245,6 @@ details[open]::before {
   align-items: center;
   margin-bottom: 20px;
   margin-left: 20px;
-}
-
-.item {
-  height: 100%;
-  width: 100%;
   object-fit: cover;
   overflow: hidden;
 }
