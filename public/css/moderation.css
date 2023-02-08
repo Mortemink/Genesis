@@ -16,6 +16,18 @@
                                       supported by Chrome, Edge, Opera and Firefox */
   }
   
+  @font-face {
+    font-family: 'Russo One'; 
+    src: local('Font Name'),
+      url(/fonts/RussoOne-Regular.ttf); 
+  }
+  
+  @font-face {
+    font-family: 'Gaefontly'; 
+    src: local('Font Name'),
+      url(/fonts/Gaefontly.ttf); 
+  }
+
   A:link {
     text-decoration: none;
     color: white;
