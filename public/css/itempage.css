@@ -27,6 +27,10 @@
     src: local('Font Name'),
       url(/fonts/Gaefontly.ttf); 
   }
+
+  button{
+    cursor: pointer;
+  }
   
   A:link {
     text-decoration: none;
@@ -210,7 +214,7 @@ details[open]::before {
 
 .add_img_info{
   width: 100%;
-  height: 550px;
+  height: 590px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -226,7 +230,6 @@ details[open]::before {
   height: 550px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
   color: white;
   font-family: Gaefontly;
@@ -241,20 +244,91 @@ details[open]::before {
   word-break: break-all;
   max-width: 90%;
   max-height: 120px;
+  padding: 10px;
+  border-radius: 10px;
+  letter-spacing: 1.2px;
+}
+
+.seller{
+  margin-top: 10px;
+  font-size: 18px;
+  width: 90%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+.seller img{ 
+  width: 40px;
+  height: 40px;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+.seller_name{
+margin-left: 10px;
+letter-spacing: 1.8px;
 }
 
 .stats{
+  margin-top: 10px;
   display: flex;
   justify-content: space-between;
   flex-direction: row;
+  width: 90%; 
+  letter-spacing: 1.4px;
+}
+
+.buttons{
+  position: relative;
   width: 90%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.buttons button{
+  width: 120px;
+  height: 30px;
+  font-size: 16px;
+  border: 1px solid #232323;
+  font-weight: 300;
+  background-color: #232323;
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.192);
+  font-family: Gaefontly;
+  letter-spacing: 2px;
+  transition: 0.2s;
+}
+
+.buttons button:hover{
+  color: rgb(255, 255, 255);
+  border: 1px solid #de5555;
+}
+
+.normal_buttons{
+  position: relative;
+  width: 85%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.moderator_buttons{
+  margin-top: 10px;
+  position: relative;
+  width: 85%;
+  display: flex;
+  justify-content: space-around;
 }
 
 .main_info{
   display: flex;
   justify-content: space-around;
   flex-direction: column;
-  height: 430px;
+  height: 260px;
   width: 45%;
   font-size: 20px;
   position: relative;
@@ -264,7 +338,7 @@ details[open]::before {
   display: flex;
   justify-content: space-around;
   flex-direction: column;
-  height: 430px;
+  height: 260px;
   width: 45%;
   font-size: 20px;
   position: relative;
@@ -272,9 +346,82 @@ details[open]::before {
 }
 
 .discription{
+  position: relative;
   color: white;
   font-size: 20px;
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-family: Gaefontly;
   width: 95%;
   line-height: 28px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  letter-spacing: 1.5px;
+}
+
+/* slider css */
+
+.slider {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  overflow: hidden;
+  height: 570px;
+  margin-top: 20px;
+  width: 900px;
+  background-color: #656565;
+  border-radius: 10px;
+  margin-left: 31px;
+  
+}
+
+.item {
+  border-radius: 3px;
+  overflow: hidden;
+  max-width: 900px;
+  height: 570px;
+}
+
+.slider .item img {
+  overflow: hidden;
+  max-width: 900px;
+  height: 570px;
+  object-fit: cover;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.slider .prev,
+.slider .next {
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.2s ease;
+}
+
+.slider .next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.slider .prev {
+  left: 0;
+  border-radius: 0 3px 3px 0;
+}
+
+.slider .prev:hover,
+.slider .next:hover {
+  color: #de5555;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.active,
+.slider-dots_item:hover {
+  background-color: #232323;
 }

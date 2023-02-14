@@ -86,11 +86,9 @@
   }
   
   .add_objective {
-    position: absolute;
-    left: calc(50% - 75px);
     background-color: initial;
-    width: 150px;
-    height: 35px;
+    width: 200px;
+    height: 40px;
     border: 1px solid #de5555;
     border-radius: 12px;
     cursor: pointer;
@@ -100,6 +98,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .buttons{
+    width: 500px;
+    height: 80px;
+    position: absolute;
+    left: calc(50% - 250px);
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
   }
   
 details {

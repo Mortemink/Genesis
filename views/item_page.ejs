@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Advertisement</title>
     <link rel="stylesheet" href="/css/itempage.css" type="text/css">
-    <link type="Image/x-icon" href="./public/img/Favicon.ico" rel="icon">
+    <link type="Image/x-icon" href="./img/Favicon.ico" rel="icon">
 </head>
 
 <body>
@@ -31,7 +31,7 @@
                                 <%} catch{%>
                                     <a href="./login">Sign In</a>
                                     <%}%>
-                                    <a href="./moderator_page">Moderation</a>
+                                        <a href="./moderator_page">Moderation</a>
                                         <a href="./catalog">Catalog</a>
             </nav>
         </details>
@@ -39,12 +39,40 @@
     <main>
         <div class="page_block">
             <div class="add_img_info">
-                <div class="page_slider">
-
+                <div class="slider">
+                    <a class="prev" onclick="minusSlide()">&#10094;</a>
+                    <a class="next" onclick="plusSlide()">&#10095;</a>
+                    <div class="item">
+                        <img src="\img\BG1.png">
+                    </div>
                 </div>
                 <div class="page_info">
                     <div class="name">
                         <p>Cool house on the riversadasdasdas</p>
+                    </div>
+                    <div class="seller">
+                        <img>
+                        <p class="seller_name">
+                            Abob
+                        </p>
+                    </div>
+                    <div class="buttons">
+                        <div class="normal_buttons">
+                            <button>
+                                <p>Message</p>
+                            </button>
+                            <button>
+                                <p>Call</p>
+                            </button>
+                        </div>
+                        <div class="moderator_buttons">
+                            <button>
+                                <p>Manage</p>
+                            </button>
+                            <button>
+                                <p>Delete</p>
+                            </button>
+                        </div>
                     </div>
                     <div class="stats">
                         <div class="main_info">
@@ -55,21 +83,39 @@
                             <p>Price</p>
                         </div>
                         <div class="main_info_stats">
-                            <p>25</p>
+                            <p>25<span>m²</span></p>
                             <p>2</p>
                             <p>1</p>
                             <p>not required</p>
-                            <p>200000$</p>
+                            <p>200000<span>$</span></p>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="discription">
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum modi natus eveniet non sequi fuga. Earum optio deserunt eveniet nobis? Quam delectus quidem dolorum rerum consequatur ipsam ipsum ea illum!
-                Commodi minima dicta perspiciatis deleniti. Vel voluptas dolorem unde numquam sunt tenetur non dicta vitae, qui nisi exercitationem quis animi iusto sit, aspernatur ut corrupti ducimus ipsa sequi nam corporis.
-                Unde vel iusto ad iste eligendi quia saepe quidem sit, laborum quisquam dignissimos libero atque, cum deserunt eum veniam voluptatum, omnis quis minima suscipit nostrum eos. Consequatur ipsum eligendi non.
-                Nesciunt reprehenderit iure ratione qui accusantium, molestias animi incidunt, nihil tenetur eum numquam maiores veniam ipsam? Dolores consequatur esse libero nesciunt facilis? Vero totam minima repellat aliquid placeat explicabo iure.
-                Id, nisi possimus. Laboriosam, tempora similique. Quasi harum aliquam corporis! Ullam at dicta cum fugit veritatis labore, similique aperiam itaque enim perferendis ut harum autem perspiciatis, dolorum doloremque ratione. Dolorum!</p>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum modi natus eveniet non sequi fuga.
+                    Earum optio deserunt eveniet nobis? Quam delectus quidem dolorum rerum consequatur ipsam ipsum ea
+                    illum!
+                    Commodi minima dicta perspiciatis deleniti. Vel voluptas dolorem unde numquam sunt tenetur non dicta
+                    vitae, qui nisi exercitationem quis animi iusto sit, aspernatur ut corrupti ducimus ipsa sequi nam
+                    corporis.
+                    Unde vel iusto ad iste eligendi quia saepe quidem sit, laborum quisquam dignissimos libero atque,
+                    cum deserunt eum veniam voluptatum, omnis quis minima suscipit nostrum eos. Consequatur ipsum
+                    eligendi non.
+                    Nesciunt reprehenderit iure ratione qui accusantium, molestias animi incidunt, nihil tenetur eum
+                    numquam maiores veniam ipsam? Dolores consequatur esse libero nesciunt facilis? Vero totam minima
+                    repellat aliquid placeat explicabo iure.
+                    Id, nisi possimus. Laboriosam, tempora similique. Quasi harum aliquam corporis! Ullam at dicta cum
+                    fugit veritatis labore, similique aperiam itaque enim perferendis ut harum autem perspiciatis,
+                    dolorum doloremque ratione. Dolorum!Unde vel iusto ad iste eligendi quia saepe quidem sit, laborum quisquam dignissimos libero atque,
+                    cum deserunt eum veniam voluptatum, omnis quis minima suscipit nostrum eos. Consequatur ipsum
+                    eligendi non.
+                    Nesciunt reprehenderit iure ratione qui accusantium, molestias animi incidunt, nihil tenetur eum
+                    numquam maiores veniam ipsam? Dolores consequatur esse libero nesciunt facilis? Vero totam minima
+                    repellat aliquid placeat explicabo iure.
+                    Id, nisi possimus. Laboriosam, tempora similique. Quasi harum aliquam corporis! Ullam at dicta cum
+                    fugit veritatis labore, similique aperiam itaque enim perferendis ut harum autem perspiciatis,
+                    dolorum doloremque ratione. Dolorum!</p>
             </div>
         </div>
     </main>
