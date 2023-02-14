@@ -2,6 +2,12 @@ if(process.env.NODE_ENV !=='production'){
     require('dotenv').config()
 }
 
+/*
+<form action="/logout?_method=DELETE" method="POST">
+    <button type="submit"></button>
+</form>
+*/
+
 const shell = require('shelljs')
 const express = require('express')
 const app = express()
@@ -14,6 +20,7 @@ const mongoose = require("mongoose")
 const users = require("./models/users")
 const forms = require("./models/forms")
 const methodOverride = require('method-override')
+const path = require('path')
 
 const initializePassport = require('./passport-config')
 initializePassport(
@@ -36,31 +43,34 @@ app.use(session({
 }))
 
 app.use(passport.initialize())
-app.use(passport.session()) 
-
-let path = require('path')
+app.use(passport.session())
+app.use(methodOverride('_method'));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
 async function start() {
+    try {
+        const DB = `mongodb://127.0.0.1/Genesis`
 
-    const DB = `mongodb://127.0.0.1/Genesis`
+        await connectedToDBCheck()
 
-    await connectedToDBCheck()
+        mongoose.set('strictQuery', true)
+        await mongoose.connect(DB, {
+                useNewUrlParser: true,
+                autoIndex: false,
+                useUnifiedTopology: true
+            })
+            .then(() => {
+                connectedToDB = true;
+                console.log('Успешное подключение к базе данных.');
 
-    mongoose.set('strictQuery', true)
-    await mongoose.connect(DB, {
-        useNewUrlParser: true,
-        autoIndex: false,
-        useUnifiedTopology: true
-    });
-
-    connectedToDB = true;
-    console.log('Успешное подключение к базе данных.');
-
-    app.listen(3000, () => {
-        console.log('Сайт запущен!\nСсылка: localhost:3000')
-    })
+                app.listen(3000, () => {
+                    console.log('Сайт запущен!\nСсылка: http://localhost:3000')
+                })
+            });
+    } catch (e) {
+        throw new Error(e);
+    }
 }
 
 let connectedToDB = false;
@@ -70,35 +80,35 @@ async function connectedToDBCheck() {
     const OS = process.platform;
     let iterations = 0;
     let tryEnableDB = false;
-    setInterval(() => {
+    const Interval = setInterval(() => {
 
         iterations++;
 
-        if (tryEnableDB == false && iterations >= maxCheckIterations && !connectedToDB) {
-            if (OS == "win32") 
+        if (tryEnableDB === false && iterations >= maxCheckIterations && !connectedToDB) {
+            if (OS === "win32")
                 shell.exec('net start mongodb');
-            else if (OS == "linux") 
+            else if (OS === "linux")
                 shell.exec('sudo systemctl restart mongodb');
             else 
-                throw new error('Служба MongoDB не смогла запуститься из Node.js, попробуйте сделать это вручную.');
+                throw new Error('Служба MongoDB не смогла запуститься из Node.js, попробуйте сделать это вручную.');
 
             tryEnableDB = true;
             iterations = 0;
             
-        } else if (tryEnableDB == true && iterations >= maxCheckIterations && !connectedToDB) {
-            throw new error('Служба MongoDB не смогла запуститься из Node.js, попробуйте сделать это вручную.');
+        } else if (tryEnableDB === true && iterations >= maxCheckIterations && !connectedToDB) {
+            throw new Error('Служба MongoDB не смогла запуститься из Node.js, попробуйте сделать это вручную.');
         }
             
-        if (connectedToDB)
-            return;
-
+        if (connectedToDB) {
+            clearInterval(Interval);
+        }
     }, 1000);
 }
 
 start();
 
 app.get('/', async (req, res) => {
-    res.render('index.ejs', { logged: !!(await req.user) })
+    res.render('index.ejs', await GetUser(req))
     
 })
 
@@ -123,7 +133,7 @@ app.post('/register', checkNotAuthenticated,  async (req, res)=>{
 
         let doesExist = await users.findOne({ email: req.body.email, telephone: req.body.telephone });
 
-        if ((!!doesExist) == true) {
+        if (doesExist) {
             res.redirect('/register?errStatus=1');
         }
         else {
@@ -133,6 +143,7 @@ app.post('/register', checkNotAuthenticated,  async (req, res)=>{
                 email: req.body.email,
                 telephone: req.body.number,
                 password: hashedPassword,
+                accountType: 0,
                 created: Date.now().toString()
             })
             newUser.save();
@@ -144,11 +155,11 @@ app.post('/register', checkNotAuthenticated,  async (req, res)=>{
 })
 
 app.get('/item_page', async (req, res) => {
-    res.render('item_page.ejs', { logged: !!(await req.user) })
+    res.render('item_page.ejs', await GetUser(req))
 })
 
 app.get('/moderator_page', async (req, res) => {
-    res.render('moderator_page.ejs', { logged: !!(await req.user) })
+    res.render('moderator_page.ejs', await GetUser(req))
 })
 
 app.post('/moderator_page', async(req, res)=>{
@@ -156,18 +167,15 @@ app.post('/moderator_page', async(req, res)=>{
 })
 
 app.get('/catalog', async (req, res) => {
-    res.render('catalog.ejs', { logged: !!(await req.user) })
+    res.render('catalog.ejs', await GetUser(req))
 })
 
 app.get('/profile', checkAuthenticated, async (req, res) => {
-    const user = await req.user
-    
-    const name = user.firstName
-    const lastname = user.lastName
-    const number = user.telephone
-    const email = user.email
-
-    res.render('profile.ejs', { name, lastname, email, number })
+    try {
+        res.render('profile.ejs', await GetUser(req))
+    } catch (e) {
+        console.error(e);
+    }
 })
 
 app.post('/sendform', checkAuthenticated, async (req, res) => {
@@ -189,6 +197,28 @@ app.post('/sendform', checkAuthenticated, async (req, res) => {
     }
 })
 
+
+
+// FUNCTIONS //
+
+async function GetUser(req) {
+    let user = await req.user;
+    if (user === undefined) {
+        user = {
+            firstName: null,
+            lastName: null,
+            email: null,
+            telephone: null,
+            accountType: null,
+        }
+    }
+
+    return {
+        logged: user.accountType != null ?? false,
+        user
+    }
+}
+
 function checkAuthenticated(req, res, next) {
     if (req.isAuthenticated()){
         return next()
@@ -203,14 +233,34 @@ function checkNotAuthenticated(req, res, next) {
     next()
 }
 
-app.delete('/logout', (req, res) => {
+// Type == 1
+function checkModerator(req, res, next) {
+    if (req.isAuthenticated() && req.user.accountType >= 1){
+        return next()
+    }
+    res.redirect('/')
+}
+
+// Type == 2
+function checkAdmin(req, res, next) {
+    if (req.isAuthenticated() && req.user.accountType >= 2){
+        return next()
+    }
+    res.redirect('/')
+}
+
+app.delete('/logout', async (req, res) => {
     try {
-        req.logOut();
+        await req.logOut((e) => {
+            if (e) {
+                console.error(e)
+            }
+        });
     } catch (e) {
         console.log(e + '\nНе получилось выйти из аккаунта, кто-то где-то насрал.')
-    } finally {
-        res.redirect('/')
     }
+
+    res.redirect('/')
 })
 
 
