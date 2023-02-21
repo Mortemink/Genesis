@@ -21,7 +21,7 @@
             <button class="add_objective"> Sort by</button>
             <button class="add_objective"> Add advertisement</button>
         </div>
-        
+
         <div class="header_background" id="querySelectorByClass"></div>
         <details>
             <summary></summary>
@@ -36,8 +36,18 @@
                                 <%} catch{%>
                                     <a href="./login">Sign In</a>
                                     <%}%>
-                                        <a href="./moderator_page">Moderation</a>
-                                        <a href="./catalog">Catalog</a>
+                                        <% if (user !==undefined && user.accountType>= 1) { %>
+                                            <a href="./moderator_page">Moderation</a>
+                                            <% } %>
+                                                <a href="./catalog">Catalog</a>
+                                                <% if (logged){%>
+                                                    <a>
+                                                <form action="/logout?_method=DELETE" method="POST">
+                                                    <button type="submit" class="exit_button">Exit</button>
+                                                </form>
+                                            </a>
+                                            <%} else{%>
+                                                <%}%>
             </nav>
         </details>
     </header>

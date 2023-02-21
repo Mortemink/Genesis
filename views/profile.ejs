@@ -15,12 +15,22 @@
     <details>
         <summary></summary>
         <nav class="menu">
-          <a href="/">Home</a>
+            <a href="/">Home</a>
             <a href="./profile">Profile</a>
-            <a href="./moderator_page">Moderation</a>
-          <a href="./catalog">Catalog</a>
+            <% if (user !==undefined && user.accountType>= 1) { %>
+                <a href="./moderator_page">Moderation</a>
+                <% } %>
+                    <a href="./catalog">Catalog</a>
+                    <% if (logged){%>
+                        <a>
+                    <form action="/logout?_method=DELETE" method="POST">
+                        <button type="submit" class="exit_button">Exit</button>
+                    </form>
+                </a>
+                <%} else{%>
+                    <%}%>
         </nav>
-      </details>
+    </details>
     <div class="mainBlock">
         <div class="profile">
             <div class="profileIMG">
@@ -28,13 +38,13 @@
             <div class="infoAboutUser" align="center">
                 <p>
                     <%= user.firstName %>
-                    <%= user.lastName %>
+                        <%= user.lastName %>
                 </p>
                 <p>
                     <%= user.email %>
                 </p>
             </div>
-           <hr>
+            <hr>
             <hr class="verical">
 
         </div>

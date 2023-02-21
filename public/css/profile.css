@@ -28,6 +28,14 @@
     
   }
 
+
+  a{
+    cursor: pointer;
+  }
+  
+  button{
+    cursor: pointer;
+  }
    
   A:link {
     text-decoration: none;
@@ -234,6 +242,16 @@ details[open]::before {
   100% {
     opacity: 0;
   }
+}
+
+.exit_button{
+  background-color: initial;
+  color: white;
+  font-family: Gaefontly;
+  font-weight: 300;
+  font-size: 16px;
+  border: none;
+  width: 50px;
 }
 
   

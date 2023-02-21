@@ -21,6 +21,14 @@
 	src: local('Font Name'),
 		url(/fonts/Gaefontly.ttf); 
 }
+
+a{
+  cursor: pointer;
+}
+
+button{
+  cursor: pointer;
+}
   
   A:link {
     text-decoration: none;

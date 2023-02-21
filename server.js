@@ -2,11 +2,6 @@ if(process.env.NODE_ENV !=='production'){
     require('dotenv').config()
 }
 
-/*
-<form action="/logout?_method=DELETE" method="POST">
-    <button type="submit"></button>
-</form>
-*/
 
 const shell = require('shelljs')
 const express = require('express')
@@ -158,11 +153,11 @@ app.get('/item_page', async (req, res) => {
     res.render('item_page.ejs', await GetUser(req))
 })
 
-app.get('/moderator_page', async (req, res) => {
+app.get('/moderator_page', checkModerator, async (req, res) => {
     res.render('moderator_page.ejs', await GetUser(req))
 })
 
-app.post('/moderator_page', async(req, res)=>{
+app.post('/moderator_page', checkModerator, async(req, res)=>{
     res.render('moderatior_page.ejs')
 })
 

@@ -28,6 +28,10 @@
       url(/fonts/Gaefontly.ttf); 
   }
 
+  a{
+    cursor: pointer;
+  }
+  
   button{
     cursor: pointer;
   }
@@ -368,7 +372,7 @@ letter-spacing: 1.8px;
   height: 570px;
   margin-top: 20px;
   width: 900px;
-  background-color: #656565;
+  background-color: #272727;
   border-radius: 10px;
   margin-left: 31px;
   
@@ -424,4 +428,14 @@ letter-spacing: 1.8px;
 .active,
 .slider-dots_item:hover {
   background-color: #232323;
+}
+
+.exit_button{
+  background-color: initial;
+  color: white;
+  font-family: Gaefontly;
+  font-weight: 300;
+  font-size: 16px;
+  border: none;
+  width: 50px;
 }

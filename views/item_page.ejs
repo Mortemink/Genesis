@@ -31,8 +31,18 @@
                                 <%} catch{%>
                                     <a href="./login">Sign In</a>
                                     <%}%>
-                                        <a href="./moderator_page">Moderation</a>
-                                        <a href="./catalog">Catalog</a>
+                                        <% if (user !==undefined && user.accountType>= 1) { %>
+                                            <a href="./moderator_page">Moderation</a>
+                                            <% } %>
+                                                <a href="./catalog">Catalog</a>
+                                                <% if (logged){%>
+                                                    <a>
+                                                <form action="/logout?_method=DELETE" method="POST">
+                                                    <button type="submit" class="exit_button">Exit</button>
+                                                </form>
+                                            </a>
+                                            <%} else{%>
+                                                <%}%>
             </nav>
         </details>
     </header>
@@ -45,10 +55,13 @@
                     <div class="item">
                         <img src="\img\BG1.png">
                     </div>
+                    <div class="item">
+                        <img src="\img\IMG_1.png">
+                    </div>
                 </div>
                 <div class="page_info">
                     <div class="name">
-                        <p>Cool houseы on the riversadasdasdas</p>
+                        <p>Cool house on the river</p>
                     </div>
                     <div class="seller">
                         <img>
@@ -65,16 +78,16 @@
                                 <p>Call</p>
                             </button>
                         </div>
-                        <% if (user !== undefined && user.accountType >= 1) { %>
-                        <div class="moderator_buttons">
-                            <button>
-                                <p>Manage</p>
-                            </button>
-                            <button>
-                                <p>Delete</p>
-                            </button>
-                        </div>
-                        <% } %>
+                        <% if (user !==undefined && user.accountType>= 1) { %>
+                            <div class="moderator_buttons">
+                                <button>
+                                    <p>Manage</p>
+                                </button>
+                                <button>
+                                    <p>Delete</p>
+                                </button>
+                            </div>
+                            <% } %>
                     </div>
                     <div class="stats">
                         <div class="main_info">
@@ -109,7 +122,8 @@
                     repellat aliquid placeat explicabo iure.
                     Id, nisi possimus. Laboriosam, tempora similique. Quasi harum aliquam corporis! Ullam at dicta cum
                     fugit veritatis labore, similique aperiam itaque enim perferendis ut harum autem perspiciatis,
-                    dolorum doloremque ratione. Dolorum!Unde vel iusto ad iste eligendi quia saepe quidem sit, laborum quisquam dignissimos libero atque,
+                    dolorum doloremque ratione. Dolorum!Unde vel iusto ad iste eligendi quia saepe quidem sit, laborum
+                    quisquam dignissimos libero atque,
                     cum deserunt eum veniam voluptatum, omnis quis minima suscipit nostrum eos. Consequatur ipsum
                     eligendi non.
                     Nesciunt reprehenderit iure ratione qui accusantium, molestias animi incidunt, nihil tenetur eum
@@ -121,7 +135,7 @@
             </div>
         </div>
     </main>
-    <script type="text/javascript" src="scripts/sliderCore.js"></script>
+    <script type="text/javascript" src="/js/sliderCore.js"></script>
 </body>
 
 </html>

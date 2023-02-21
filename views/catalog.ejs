@@ -26,96 +26,107 @@
             <nav class="menu">
                 <a href="/">Home</a>
                 <% try{%>
-                <% if (logged){%>
-                <a href="./profile">Profile</a>
-                <%} else{%>
-                <a href="./login">Sign In</a>
-                <%}%>
-                <%} catch{%>
-                <a href="./login">Sign In</a>
-                <%}%>
-                <a href="./moderator_page">Moderation</a>
-                <a href="./catalog">Catalog</a>
+                    <% if (logged){%>
+                        <a href="./profile">Profile</a>
+                        <%} else{%>
+                            <a href="./login">Sign In</a>
+                            <%}%>
+                                <%} catch{%>
+                                    <a href="./login">Sign In</a>
+                                    <%}%>
+                                        <% if (user !==undefined && user.accountType>= 1) { %>
+                                            <a href="./moderator_page">Moderation</a>
+                                            <% } %>
+                                                <a href="./catalog">Catalog</a>
+                                                    <% if (logged){%>
+                                                        <a>
+                                                    <form action="/logout?_method=DELETE" method="POST">
+                                                        <button type="submit" class="exit_button">Exit</button>
+                                                    </form>
+                                                </a>
+                                                <%} else{%>
+                                                    <%}%>
+                                                    
             </nav>
         </details>
     </header>
     <main>
         <div class="item_list">
             <a href="./item_page">
-            <div class="item">
-                <div class="info">
-                    <p class="Titile" style="margin-top: 0;">Residential complex «<span
-                            style="color: #de5555; ">Paradise</span>»</p>
-                    <p style="margin-top:12px;">17 Kathleen Drive, Syosset, NY 11791</p>
-                    <p>One-room apartmet</p>
-                    <p>Build in: 2013</p>
-                    <p>Natural gas, hot water</p>
-                    <p>Square Feet: 400</p>
-                    <p>Price: 40 000$</p>
+                <div class="item">
+                    <div class="info">
+                        <p class="Titile" style="margin-top: 0;">Residential complex «<span
+                                style="color: #de5555; ">Paradise</span>»</p>
+                        <p style="margin-top:12px;">17 Kathleen Drive, Syosset, NY 11791</p>
+                        <p>One-room apartmet</p>
+                        <p>Build in: 2013</p>
+                        <p>Natural gas, hot water</p>
+                        <p>Square Feet: 400</p>
+                        <p>Price: 40 000$</p>
+                    </div>
+                    <img src="/img/BG1.png">
                 </div>
-                <img src="/img/BG1.png">
-            </div>
-        </a>
-        <a href="./item_page">
-            <div class="item">
-                <div class="info">
-                    <p class="Titile" style="margin-top: 0;">Residential complex «<span
-                            style="color: #de5555; ">Paradise</span>»</p>
-                    <p style="margin-top:12px;">17 Kathleen Drive, Syosset, NY 11791</p>
-                    <p>One-room apartmet</p>
-                    <p>Build in: 2013</p>
-                    <p>Natural gas, hot water</p>
-                    <p>Square Feet: 400</p>
-                    <p>Price: 40 000$</p>
+            </a>
+            <a href="./item_page">
+                <div class="item">
+                    <div class="info">
+                        <p class="Titile" style="margin-top: 0;">Residential complex «<span
+                                style="color: #de5555; ">Paradise</span>»</p>
+                        <p style="margin-top:12px;">17 Kathleen Drive, Syosset, NY 11791</p>
+                        <p>One-room apartmet</p>
+                        <p>Build in: 2013</p>
+                        <p>Natural gas, hot water</p>
+                        <p>Square Feet: 400</p>
+                        <p>Price: 40 000$</p>
+                    </div>
+                    <img src="/img/BG1.png">
                 </div>
-                <img src="/img/BG1.png">
-            </div>
-        </a>
-        <a href="./item_page">
-            <div class="item">
-                <div class="info">
-                    <p class="Titile" style="margin-top: 0;">Residential complex «<span
-                            style="color: #de5555; ">Paradise</span>»</p>
-                    <p style="margin-top:12px;">17 Kathleen Drive, Syosset, NY 11791</p>
-                    <p>One-room apartmet</p>
-                    <p>Build in: 2013</p>
-                    <p>Natural gas, hot water</p>
-                    <p>Square Feet: 400</p>
-                    <p>Price: 40 000$</p>
+            </a>
+            <a href="./item_page">
+                <div class="item">
+                    <div class="info">
+                        <p class="Titile" style="margin-top: 0;">Residential complex «<span
+                                style="color: #de5555; ">Paradise</span>»</p>
+                        <p style="margin-top:12px;">17 Kathleen Drive, Syosset, NY 11791</p>
+                        <p>One-room apartmet</p>
+                        <p>Build in: 2013</p>
+                        <p>Natural gas, hot water</p>
+                        <p>Square Feet: 400</p>
+                        <p>Price: 40 000$</p>
+                    </div>
+                    <img src="/img/BG1.png">
                 </div>
-                <img src="/img/BG1.png">
-            </div>
-        </a>
-        <a href="./item_page">
-            <div class="item">
-                <div class="info">
-                    <p class="Titile" style="margin-top: 0;">Residential complex «<span
-                            style="color: #de5555; ">Paradise</span>»</p>
-                    <p style="margin-top:12px;">17 Kathleen Drive, Syosset, NY 11791</p>
-                    <p>One-room apartmet</p>
-                    <p>Build in: 2013</p>
-                    <p>Natural gas, hot water</p>
-                    <p>Square Feet: 400</p>
-                    <p>Price: 40 000$</p>
+            </a>
+            <a href="./item_page">
+                <div class="item">
+                    <div class="info">
+                        <p class="Titile" style="margin-top: 0;">Residential complex «<span
+                                style="color: #de5555; ">Paradise</span>»</p>
+                        <p style="margin-top:12px;">17 Kathleen Drive, Syosset, NY 11791</p>
+                        <p>One-room apartmet</p>
+                        <p>Build in: 2013</p>
+                        <p>Natural gas, hot water</p>
+                        <p>Square Feet: 400</p>
+                        <p>Price: 40 000$</p>
+                    </div>
+                    <img src="/img/BG1.png">
                 </div>
-                <img src="/img/BG1.png">
-            </div>
-        </a>
-        <a href="./item_page">
-            <div class="item">
-                <div class="info">
-                    <p class="Titile" style="margin-top: 0;">Residential complex «<span
-                            style="color: #de5555; ">Paradise</span>»</p>
-                    <p style="margin-top:12px;">17 Kathleen Drive, Syosset, NY 11791</p>
-                    <p>One-room apartmet</p>
-                    <p>Build in: 2013</p>
-                    <p>Natural gas, hot water</p>
-                    <p>Square Feet: 400</p>
-                    <p>Price: 40 000$</p>
+            </a>
+            <a href="./item_page">
+                <div class="item">
+                    <div class="info">
+                        <p class="Titile" style="margin-top: 0;">Residential complex «<span
+                                style="color: #de5555; ">Paradise</span>»</p>
+                        <p style="margin-top:12px;">17 Kathleen Drive, Syosset, NY 11791</p>
+                        <p>One-room apartmet</p>
+                        <p>Build in: 2013</p>
+                        <p>Natural gas, hot water</p>
+                        <p>Square Feet: 400</p>
+                        <p>Price: 40 000$</p>
+                    </div>
+                    <img src="/img/BG1.png">
                 </div>
-                <img src="/img/BG1.png">
-            </div>
-        </a>
+            </a>
         </div>
     </main>
 </body>

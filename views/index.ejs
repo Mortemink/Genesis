@@ -27,23 +27,33 @@
         <details>
             <summary></summary>
             <nav class="menu">
-              <a href="/">Home</a>
-            <% try{%>
-            <% if (logged){%>
-                <a href="./profile">Profile</a>
-            <%} else{%>
-              <a href="./login">Sign In</a>
-            <%}%>
-            <%} catch{%>
-                <a href="./login">Sign In</a>
-            <%}%>
-              <a href="./moderator_page">Moderation</a>
-              <a href="./catalog">Catalog</a>
+                <a href="/">Home</a>
+                <% try{%>
+                    <% if (logged){%>
+                        <a href="profile">Profile</a>
+                        <%} else{%>
+                            <a href="login">Sign In</a>
+                            <%}%>
+                                <%} catch{%>
+                                    <a href="login">Sign In</a>
+                                    <%}%>
+                                        <% if (user !==undefined && user.accountType>= 1) { %>
+                                            <a href="moderator_page">Moderation</a>
+                                            <% } %>
+                                                <a href="catalog">Catalog</a>
+                                                <% if (logged){%>
+                                                    <a>
+                                                        <form action="/logout?_method=DELETE" method="POST">
+                                                            <button type="submit" class="exit_button">Exit</button>
+                                                        </form>
+                                                    </a>
+                                                    <%} %>
+
             </nav>
-          </details>
+        </details>
     </header>
     <main>
-        
+
         <div class="mainBG">
             <p
                 style="font-size:36px; font-family: Gaefontly; font-weight: 100; color: #de5555; position: absolute; top: 300px;">
@@ -161,47 +171,47 @@
                     <div>
                         <p>Counrty</p>
                         <% if (logged) { %>
-                            <input name="country" placeholder="example: USA" required> 
-                        <% } else { %>
-                            <input placeholder="You must be logged for text here" disabled> 
-                        <% } %>
+                            <input name="country" placeholder="example: USA" required>
+                            <% } else { %>
+                                <input placeholder="You must be logged for text here" disabled>
+                                <% } %>
                     </div>
                     <div>
                         <p>State</p>
                         <% if (logged) { %>
                             <input name="state" placeholder="example: Ohio" required>
-                        <% } else { %>
-                            <input placeholder="You must be logged for text here" disabled> 
-                        <% } %>
+                            <% } else { %>
+                                <input placeholder="You must be logged for text here" disabled>
+                                <% } %>
                     </div>
                     <div>
                         <p>City</p>
                         <% if (logged) { %>
                             <input name="city" placeholder="example: Columbus" required>
-                        <% } else { %>
-                            <input placeholder="You must be logged for text here" disabled> 
-                        <% } %>
+                            <% } else { %>
+                                <input placeholder="You must be logged for text here" disabled>
+                                <% } %>
                     </div>
 
                     <div>
                         <p>Type of service</p>
-                        <select name="typeofservice" required <% if (logged == false) { %> disabled <% } %>>
-                            <% if (logged) { %>
-                                <option value="">Choose option</option>
-                            <% } else { %>
-                                <option value="">You must be logged for select</option>
-                            <% } %>
-                            <option value="sell">Sell</option>
-                            <option value="purchase">Purchase</option>
-                            <option value="rent">Rent</option>
+                        <select name="typeofservice" required <% if (logged==false) { %> disabled <% } %>>
+                                <% if (logged) { %>
+                                    <option value="">Choose option</option>
+                                    <% } else { %>
+                                        <option value="">You must be logged for select</option>
+                                        <% } %>
+                                            <option value="sell">Sell</option>
+                                            <option value="purchase">Purchase</option>
+                                            <option value="rent">Rent</option>
                         </select>
                     </div>
                 </div>
                 <% if (logged) { %>
-                <button type="submit">Submit</button>
-                <% } else { %>
-                <button type="button" onclick="window.location.href='/login'">Log in</button>
-                <% } %>
+                    <button type="submit">Submit</button>
+                    <% } else { %>
+                        <button type="button" onclick="window.location.href='/login'">Log in</button>
+                        <% } %>
             </form>
         </div>
         <div class="fifthBG">
@@ -232,7 +242,7 @@
         <div class="location">
             <p>Our main office is located in New York</p>
         </div>
-        <div class="copyR">© copyright 2023 </div>
+        <div class="copyR">© copyleft 2023 </div>
         <img src="/img/footerBG.png">
 
     </footer>
