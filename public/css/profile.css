@@ -25,7 +25,6 @@
   body {
     background-color: #2b2b2b;
     overflow: hidden;
-    
   }
 
 
@@ -59,88 +58,38 @@
     outline-offset: 0;
   }
 
-  .mainBlock{
+
+  header {
+    position: relative;
+    height: 80px;
     width: 100%;
-    height: 960px;
     display: flex;
-    justify-content: center;
     align-items: center;
-    flex-direction: column;
+    z-index: 2;
+    background-color: #272727;
+    box-shadow: 0px 2px 14px #333333;
   }
 
-  .profile{
-    border-radius: 8px;
-    position: absolute;
-    background-color: #232323;
-    border: 2px solid #de5555;
-    width: 80%;
-    height: 900px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
-
-  .profileIMG{
-    border-radius: 50%;
-    position: absolute;
-    width: 190px;
-    height: 190px;
-    background-color: white;
-    top: 60px;
-  }
-
-  .profileInfo{
-    position: absolute;
-    top: 260px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
+  .logo {
     color: white;
-    font-size: 20px;
-    font-family: Georgia;
-    font-weight: 600;
-  }
-
-  hr{
     position: absolute;
-    width: 90%;
+    font-size: 35px;
+    font-family: russo one;
+    font-weight: 200;
+    left: 70px;
+  }
+  
+  .logo span {
     color: #de5555;
-    background-color: #de5555;
-    top: 350px;
-    height: 1px;
-    border: none;
-  }
-
-  .verical{
-    position: absolute;
-    width: 1px;
-    color: #de5555;
-    background-color: #de5555;
-    top: 375px;
-    height: 500px;
-    border: none;
-  }
-
-  .infoAboutUser{
-    position: absolute;
-    color: white;
-    font-family: Georgia;
-   font-weight: 600;
-   font-size: 22px;
-   top: 265px;
   }
 
   
 /* menu css */
-
-
+  
 details {
   z-index: 235235;
   position: absolute;
   right: 70px;
-  top: 50px;
 }
 summary {
   text-align: center;
@@ -243,7 +192,7 @@ details[open]::before {
     opacity: 0;
   }
 }
-
+  
 .exit_button{
   background-color: initial;
   color: white;
@@ -254,4 +203,112 @@ details[open]::before {
   width: 50px;
 }
 
+
+/* profile css*/
+
+.profileMain {
+  height: 800px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profileBlock {
+  position: relative;
+  width: 480px;
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 600px;
+  border: 2px solid #de5555;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profileIMG {
+  position: relative;
+  width: 100%;
+  height: 120px;
+  display: flex;
+  align-items:  center;
+  justify-content: center;
+}
+
+.profileIMG img{
+  height: 100px;
+  width: 100px;
+  background-color: #5f5f5f;
+  border-radius: 50%;
+}
+
+.userInfo {
+  position: relative;
+  width: auto;
+  max-width: 480px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+
+}
+
+.userInfo p{
+  font-size: 18px;
+  font-family: gaefontly;
+  margin-left: 2px;
+  margin-right: 2px;  
+  color: white;
+}
+
+.infoChange{
+  font-size: 13px;
+  font-family: gaefontly;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.infoChange form button{
+  background-color: initial;
+  border: none;
+  color: #5f5f5f;
+  transition: 0.1s;
+}
+
+
+.infoChange form button:hover{
+  color: #de5555;
+}
+
+.userStats{
+  width: 100%;
+  height: 80px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   
+}
+
+.userStats p{
+  font-size: 16px;
+  font-family: gaefontly;
+  margin-top: 6px;
+  color: white;
+  letter-spacing: 1px;
+}
+
+.statsNaming{
+  width: 50%;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+}
+
+.stats{
+  width: 50%;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  text-align: end;
+}

@@ -12,42 +12,81 @@
 </head>
 
 <body>
-    <details>
-        <summary></summary>
-        <nav class="menu">
-            <a href="/">Home</a>
-            <a href="./profile">Profile</a>
-            <% if (user !==undefined && user.accountType>= 1) { %>
-                <a href="./moderator_page">Moderation</a>
-                <% } %>
-                    <a href="./catalog">Catalog</a>
+    <header>
+        <div class="logo">
+            <a href="/">
+                <span>G</span>enesis
+            </a>
+        </div>
+        <div class="header_background" id="querySelectorByClass"></div>
+        <details>
+            <summary></summary>
+            <nav class="menu">
+                <a href="/">Home</a>
+                <% try{%>
                     <% if (logged){%>
-                        <a>
-                    <form action="/logout?_method=DELETE" method="POST">
-                        <button type="submit" class="exit_button">Exit</button>
-                    </form>
-                </a>
-                <%} else{%>
-                    <%}%>
-        </nav>
-    </details>
-    <div class="mainBlock">
-        <div class="profile">
+                        <a href="./profile">Profile</a>
+                        <%} else{%>
+                            <a href="./login">Sign In</a>
+                            <%}%>
+                                <%} catch{%>
+                                    <a href="./login">Sign In</a>
+                                    <%}%>
+                                        <% if (user !==undefined && user.accountType>= 1) { %>
+                                            <a href="./moderator_page">Moderation</a>
+                                            <% } %>
+                                                <a href="./catalog">Catalog</a>
+                                                <% if (logged){%>
+                                                    <a>
+                                                        <form action="/logout?_method=DELETE" method="POST">
+                                                            <button type="submit" class="exit_button">Exit</button>
+                                                        </form>
+                                                    </a>
+                                                    <%} else{%>
+                                                        <%}%>
+            </nav>
+        </details>
+    </header>
+
+    <!-- <%= user.email %>  -->
+    <div class="profileMain">
+        <div class="profileBlock">
+
             <div class="profileIMG">
+                <img>
             </div>
-            <div class="infoAboutUser" align="center">
+            <div class="userInfo">
                 <p>
                     <%= user.firstName %>
-                        <%= user.lastName %>
                 </p>
                 <p>
-                    <%= user.email %>
+                    <%= user.lastName %>
                 </p>
             </div>
-            <hr>
-            <hr class="verical">
+            <div class="infoChange">
+                <form><button>Change data</button></form>
+            </div>
+            <div class="userStats">
+                <div class="statsNaming">
+                    <p>Date of registration</p>
+                    <p>eMail</p>
+                    <p>Password</p>
+                </div>
+                <div class="stats">
+                    <p>
+                        <%= user.created.toLocaleDateString('ru-RU') %>
+                    </p>
+                    <p>
+                        <%= user.email %>
+                    </p>
+                    <p>*******</p>
+                </div>
+            </div>
 
         </div>
+    </div>
+    </div>
+
     </div>
 </body>
 
