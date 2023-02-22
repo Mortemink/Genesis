@@ -1,9 +1,7 @@
-if(process.env.NODE_ENV !=='production'){
+if(process.env.NODE_ENV !== 'production'){
     require('dotenv').config()
 }
 
-
-const shell = require('shelljs')
 const express = require('express')
 const app = express()
 const bcrypt = require('bcrypt')
@@ -30,7 +28,7 @@ app.set('views', 'views')
 app.use(bodyParser.urlencoded({ extended: false}))
 app.use(flash())
 app.use(session({
-    secret: process.env.SESSION_SECRET,
+    secret: process.env.SESSION_SECRET || 'xXx_ЕБУЧКА_xXx',
     resave: false,
     saveUninitialized: false,
     httpOnly: true,
@@ -39,15 +37,13 @@ app.use(session({
 
 app.use(passport.initialize())
 app.use(passport.session())
-app.use(methodOverride('_method'));
+app.use(methodOverride('_method'))
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')))
 
 async function start() {
     try {
-        const DB = `mongodb://127.0.0.1/Genesis`
-
-        await connectedToDBCheck()
+        const DB = `mongodb://127.0.0.1:27017/Genesis`
 
         mongoose.set('strictQuery', true)
         await mongoose.connect(DB, {
@@ -56,51 +52,18 @@ async function start() {
                 useUnifiedTopology: true
             })
             .then(() => {
-                connectedToDB = true;
-                console.log('Успешное подключение к базе данных.');
-
-                app.listen(3000, () => {
-                    console.log('Сайт запущен!\nСсылка: http://localhost:3000')
-                })
-            });
+                console.log('Успешное подключение к базе данных.')
+            })
     } catch (e) {
-        throw new Error(e);
+        throw new Error(e)
     }
 }
 
-let connectedToDB = false;
-const maxCheckIterations = 5;
-async function connectedToDBCheck() {
-    const shell = require('shelljs');
-    const OS = process.platform;
-    let iterations = 0;
-    let tryEnableDB = false;
-    const Interval = setInterval(() => {
-
-        iterations++;
-
-        if (tryEnableDB === false && iterations >= maxCheckIterations && !connectedToDB) {
-            if (OS === "win32")
-                shell.exec('net start mongodb');
-            else if (OS === "linux")
-                shell.exec('sudo systemctl restart mongodb');
-            else 
-                throw new Error('Служба MongoDB не смогла запуститься из Node.js, попробуйте сделать это вручную.');
-
-            tryEnableDB = true;
-            iterations = 0;
-            
-        } else if (tryEnableDB === true && iterations >= maxCheckIterations && !connectedToDB) {
-            throw new Error('Служба MongoDB не смогла запуститься из Node.js, попробуйте сделать это вручную.');
-        }
-            
-        if (connectedToDB) {
-            clearInterval(Interval);
-        }
-    }, 1000);
-}
-
-start();
+start()
+    .then(() => {
+        app.listen(3000)
+        console.log('Сайт запущен!\nСсылка: http://localhost:3000')
+    })
 
 app.get('/', async (req, res) => {
     res.render('index.ejs', await GetUser(req))
@@ -157,8 +120,8 @@ app.get('/moderator_page', checkModerator, async (req, res) => {
     res.render('moderator_page.ejs', await GetUser(req))
 })
 
-app.post('/moderator_page', checkModerator, async(req, res)=>{
-    res.render('moderatior_page.ejs')
+app.post('/moderator_page', checkModerator, async(req, res) => {
+    throw new Error('Еще не сделано')
 })
 
 app.get('/catalog', async (req, res) => {
@@ -229,18 +192,26 @@ function checkNotAuthenticated(req, res, next) {
 }
 
 // Type == 1
-function checkModerator(req, res, next) {
-    if (req.isAuthenticated() && req.user.accountType >= 1){
-        return next()
+async function checkModerator(req, res, next) {
+    if (req.isAuthenticated()) {
+        const user = await req.user.clone();
+        if (user.accountType >= 1) {
+            return next()
+        }
     }
+
     res.redirect('/')
 }
 
 // Type == 2
-function checkAdmin(req, res, next) {
-    if (req.isAuthenticated() && req.user.accountType >= 2){
-        return next()
+async function checkAdmin(req, res, next) {
+    if (req.isAuthenticated()){
+        const user = await req.user.clone();
+        if (user.accountType >= 2) {
+            return next()
+        }
     }
+    
     res.redirect('/')
 }
 
