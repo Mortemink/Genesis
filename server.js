@@ -80,6 +80,16 @@ app.post('/login', checkNotAuthenticated,  passport.authenticate('local',{
     failureFlash: true,
 }))
 
+
+app.get('/addItem',  checkModerator ,async (req, res) => {
+    res.render('add_item.ejs', await GetUser(req))
+    
+})
+
+app.post('/addItem', checkNotAuthenticated,  passport.authenticate('local',{
+   
+}))
+
  
 app.get('/register', checkNotAuthenticated,  (req, res) =>{
     res.render('register.ejs')

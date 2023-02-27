@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advertisement</title>
+    <link rel="stylesheet" href="/css/addItem.css" type="text/css">
+    <link type="Image/x-icon" href="./img/Favicon.ico" rel="icon">
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <a href="/">
+                <span>G</span>enesis
+            </a>
+        </div>
+        <div class="header_background" id="querySelectorByClass"></div>
+        <details>
+            <summary></summary>
+            <nav class="menu">
+                <a href="/">Home</a>
+                <% try{%>
+                    <% if (logged){%>
+                        <a href="./profile">Profile</a>
+                        <%} else{%>
+                            <a href="./login">Sign In</a>
+                            <%}%>
+                                <%} catch{%>
+                                    <a href="./login">Sign In</a>
+                                    <%}%>
+                                        <% if (user !==undefined && user.accountType>= 1) { %>
+                                            <a href="./moderator_page">Moderation</a>
+                                            <% } %>
+                                                <a href="./catalog">Catalog</a>
+                                                <% if (logged){%>
+                                                    <a>
+                                                <form action="/logout?_method=DELETE" method="POST">
+                                                    <button type="submit" class="exit_button">Exit</button>
+                                                </form>
+                                            </a>
+                                            <%} else{%>
+                                                <%}%>
+            </nav>
+        </details>
+    </header>
+    <main>
+        <div class="page_block">
+            <div class="add_img_info">
+                <div class="slider">
+                   <p>Add pictures</p>
+                   <p style="color:#de5555; font-size: 80px;">+</p>
+                </div>
+                <div class="page_info">
+                    <div class="name">
+                        <textarea placeholder="Title" style="max-width: 315px; min-width: 315px; max-height: 119px;"></textarea>
+                    </div>
+                    <div class="seller">
+                        <img>
+                        <p class="seller_name">
+                            Abob
+                        </p>
+                    </div>
+                    <div class="buttons">
+                        <div class="normal_buttons">
+                        </div>
+                        <% if (user !==undefined && user.accountType>= 1) { %>
+                            <div class="moderator_buttons">
+                                <button>
+                                    <p>Add</p>
+                                </button>
+                            </div>
+                            <% } %>
+                    </div>
+                    <div class="stats">
+                        <div class="main_info">
+                            <p>Square</p>
+                            <p>Floor</p>
+                            <p>Floor count</p>
+                            <p>Repair</p>
+                            <p>Price</p>
+                        </div>
+                        <div class="main_info_stats">
+                            <input type="number">
+                            <input type="number">
+                            <input type="number">
+                            <select>
+                                <option>Choose</option>
+                                <option>Required</option>
+                                <option>Not required</option>
+                              </select>
+                            <input type="number">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="discription">
+                <textarea  style="min-width: 900px;max-width: 900px; min-height: 200px;"></textarea>
+            </div>
+        </div>
+    </main>
+    <script type="text/javascript" src="/js/sliderCore.js"></script>
+</body>
+
+</html>
