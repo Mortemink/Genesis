@@ -350,11 +350,17 @@ async function encodeImages(req) {
 
     if (req.files && req.files.images) {
         for (const key in req.files.images) {
-            let image = req.files.images[key];
+            let image;
+            if (req.files.images.length === undefined) {
+                image = req.files.images
+            } else {
+                image = req.files.images[key]
+            }
+
             try {
                 // скип фотки если вес больше 4мб (или 5 не помню пох)
                 const acceptedMimetypes = ['image/png', 'image/jpg', 'image/jpeg', 'image/bmp', 'image/gif']
-                if (image.size > 16000 * 8 /* 16 МБ */ || !acceptedMimetypes.includes(image.mimetype)) {
+                if (image.size > 16000000 || !acceptedMimetypes.includes(image.mimetype)) {
                     continue
                 }
                 images.push({
