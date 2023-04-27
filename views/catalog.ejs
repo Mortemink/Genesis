@@ -71,7 +71,11 @@
                     <p>Price: <%= item.price %>$</p>
                 </div>
                 <img
-                        src="data:<%= image.mimetype %>;base64,<%= image.buffer.toString('base64') %>"
+                <% if (image.mimetype !== null) { %>
+                    src="data:<%= image.mimetype %>;base64,<%= image.buffer.toString('base64') %>"
+                <% } else { %>
+                    src="./img/nophoto.png"
+                <% } %>
                 />
             </div>
         </a>

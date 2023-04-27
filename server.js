@@ -354,7 +354,7 @@ async function encodeImages(req) {
             try {
                 // скип фотки если вес больше 4мб (или 5 не помню пох)
                 const acceptedMimetypes = ['image/png', 'image/jpg', 'image/jpeg', 'image/bmp', 'image/gif']
-                if (image.size > 5243260 || !acceptedMimetypes.includes(image.mimetype)) {
+                if (image.size > 1.6e+7 /* 16 МБ */ || !acceptedMimetypes.includes(image.mimetype)) {
                     continue
                 }
                 images.push({
