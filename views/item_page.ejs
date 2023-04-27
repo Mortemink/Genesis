@@ -52,21 +52,23 @@
                 <div class="slider">
                     <a class="prev" onclick="minusSlide()">&#10094;</a>
                     <a class="next" onclick="plusSlide()">&#10095;</a>
-                    <div class="item">
-                        <img src="\img\BG1.png">
-                    </div>
-                    <div class="item">
-                        <img src="\img\IMG_1.png">
-                    </div>
+                    <% for (var key in item.images) {
+                       var image = item.images[key]; %>
+                        <div class="item">
+                            <img
+                                src="data:<%= image.mimetype %>;base64,<%= image.buffer.toString('base64') %>"
+                            />
+                        </div>
+                    <% } %>
                 </div>
                 <div class="page_info">
                     <div class="name">
-                        <p>Cool house on the river</p>
+                        <p><%= item.title %></p>
                     </div>
                     <div class="seller">
                         <img>
                         <p class="seller_name">
-                            Abob
+                            <%= item.sellerName %>
                         </p>
                     </div>
                     <div class="buttons">
@@ -98,40 +100,17 @@
                             <p>Price</p>
                         </div>
                         <div class="main_info_stats">
-                            <p>25<span>m²</span></p>
-                            <p>2</p>
-                            <p>1</p>
-                            <p>not required</p>
-                            <p>200000<span>$</span></p>
+                            <p><%= item.square %><span>m²</span></p>
+                            <p><%= item.floor %></p>
+                            <p><%= item.floorCount %></p>
+                            <p><%= item.repair %></p>
+                            <p><%= item.price %><span>$</span></p>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="discription">
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum modi natus eveniet non sequi fuga.
-                    Earum optio deserunt eveniet nobis? Quam delectus quidem dolorum rerum consequatur ipsam ipsum ea
-                    illum!
-                    Commodi minima dicta perspiciatis deleniti. Vel voluptas dolorem unde numquam sunt tenetur non dicta
-                    vitae, qui nisi exercitationem quis animi iusto sit, aspernatur ut corrupti ducimus ipsa sequi nam
-                    corporis.
-                    Unde vel iusto ad iste eligendi quia saepe quidem sit, laborum quisquam dignissimos libero atque,
-                    cum deserunt eum veniam voluptatum, omnis quis minima suscipit nostrum eos. Consequatur ipsum
-                    eligendi non.
-                    Nesciunt reprehenderit iure ratione qui accusantium, molestias animi incidunt, nihil tenetur eum
-                    numquam maiores veniam ipsam? Dolores consequatur esse libero nesciunt facilis? Vero totam minima
-                    repellat aliquid placeat explicabo iure.
-                    Id, nisi possimus. Laboriosam, tempora similique. Quasi harum aliquam corporis! Ullam at dicta cum
-                    fugit veritatis labore, similique aperiam itaque enim perferendis ut harum autem perspiciatis,
-                    dolorum doloremque ratione. Dolorum!Unde vel iusto ad iste eligendi quia saepe quidem sit, laborum
-                    quisquam dignissimos libero atque,
-                    cum deserunt eum veniam voluptatum, omnis quis minima suscipit nostrum eos. Consequatur ipsum
-                    eligendi non.
-                    Nesciunt reprehenderit iure ratione qui accusantium, molestias animi incidunt, nihil tenetur eum
-                    numquam maiores veniam ipsam? Dolores consequatur esse libero nesciunt facilis? Vero totam minima
-                    repellat aliquid placeat explicabo iure.
-                    Id, nisi possimus. Laboriosam, tempora similique. Quasi harum aliquam corporis! Ullam at dicta cum
-                    fugit veritatis labore, similique aperiam itaque enim perferendis ut harum autem perspiciatis,
-                    dolorum doloremque ratione. Dolorum!</p>
+                <p><%= item.description %></p>
             </div>
         </div>
     </main>

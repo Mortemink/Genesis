@@ -11,68 +11,81 @@
 </head>
 
 <body>
-    <header>
-        <div class="logo">
-            <a href="/">
-                <span>G</span>enesis
-            </a>
-        </div>
-        <div class="header_background" id="querySelectorByClass"></div>
-        <details>
-            <summary></summary>
-            <nav class="menu">
-                <a href="/">Home</a>
-                <% try{%>
-                    <% if (logged){%>
-                        <a href="./profile">Profile</a>
-                        <%} else{%>
-                            <a href="./login">Sign In</a>
-                            <%}%>
-                                <%} catch{%>
-                                    <a href="./login">Sign In</a>
-                                    <%}%>
-                                        <% if (user !==undefined && user.accountType>= 1) { %>
-                                            <a href="./moderator_page">Moderation</a>
-                                            <% } %>
-                                                <a href="./catalog">Catalog</a>
-                                                <% if (logged){%>
-                                                    <a>
-                                                <form action="/logout?_method=DELETE" method="POST">
-                                                    <button type="submit" class="exit_button">Exit</button>
-                                                </form>
-                                            </a>
-                                            <%} else{%>
-                                                <%}%>
-            </nav>
-        </details>
-    </header>
+<header>
+    <div class="logo">
+        <a href="/">
+            <span>G</span>enesis
+        </a>
+    </div>
+    <div class="header_background" id="querySelectorByClass"></div>
+    <details>
+        <summary></summary>
+        <nav class="menu">
+            <a href="/">Home</a>
+            <% try{ %>
+                <% if (logged){ %>
+                    <a href="./profile">Profile</a>
+                <% } else{ %>
+                    <a href="./login">Sign In</a>
+                <% } %>
+            <% } catch{ %>
+                <a href="./login">Sign In</a>
+            <% } %>
+            <% if (user !== undefined && user.accountType >= 1) { %>
+                <a href="./moderator_page">Moderation</a>
+            <% } %>
+            <a href="./catalog">Catalog</a>
+            <% if (logged){ %>
+                <a>
+                    <form action="/logout?_method=DELETE" method="POST">
+                        <button type="submit" class="exit_button">Exit</button>
+                    </form>
+                </a>
+            <% } else{ %>
+            <% } %>
+        </nav>
+    </details>
+</header>
+<form action="/addItem" method="POST" enctype="multipart/form-data">
     <main>
         <div class="page_block">
             <div class="add_img_info">
-                <div class="slider">
-                   <p>Add pictures</p>
-                   <p style="color:#de5555; font-size: 80px;">+</p>
-                </div>
+                <label id="labelInput" for="imagesInput">
+                    <div class="slider">
+                        <div class="loadingPanel hidden"></div>
+
+                        <a class="prev hidden" onclick="minusSlide()">&#10094;</a>
+                        <a class="next hidden" onclick="plusSlide()">&#10095;</a>
+
+                        <p class="addPictures">Add pictures</p>
+                        <p class="addPictures" style="color:#de5555; font-size: 80px;">+</p>
+
+
+                        <input onchange="previewImages(this)" id="imagesInput" name="images" multiple type="file"
+                               class="hidden" accept=".png .jpg .jpeg .bmp .gif">
+                    </div>
+                </label>
                 <div class="page_info">
                     <div class="name">
-                        <textarea placeholder="Title" style="max-width: 315px; min-width: 315px; max-height: 119px;"></textarea>
+                        <textarea placeholder="Title" name="title" required
+                                  style="max-width: 315px; min-width: 315px; max-height: 119px;"></textarea>
                     </div>
                     <div class="seller">
                         <img>
                         <p class="seller_name">
-                            Abob
+                            <input type="text" name="sellerName" required placeholder="Имя продавана">
                         </p>
                     </div>
                     <div class="buttons">
                         <div class="normal_buttons">
                         </div>
-                        <% if (user !==undefined && user.accountType>= 1) { %>
+                        <% if (user !== undefined && user.accountType >= 1) { %>
                             <div class="moderator_buttons">
-                                <button>
+                                <button type="submit">
                                     <p>Add</p>
                                 </button>
                             </div>
-                            <% } %>
+                        <% } %>
                     </div>
                     <div class="stats">
                         <div class="main_info">
@@ -83,25 +96,26 @@
                             <p>Price</p>
                         </div>
                         <div class="main_info_stats">
-                            <input type="number">
-                            <input type="number">
-                            <input type="number">
-                            <select>
-                                <option>Choose</option>
-                                <option>Required</option>
-                                <option>Not required</option>
-                              </select>
-                            <input type="number">
+                            <input name="square" required type="number" value="0">
+                            <input name="floor" required type="number" value="1">
+                            <input name="floorCount" required type="number" value="1">
+                            <select name="repair" required selected="Required">
+                                <option value="Required">Required</option>
+                                <option value="Not required">Not required</option>
+                            </select>
+                            <input type="number" name="price" value="0" min="0">
                         </div>
                     </div>
                 </div>
             </div>
             <div class="discription">
-                <textarea  style="min-width: 900px;max-width: 900px; min-height: 200px;"></textarea>
+                <textarea name="description" required placeholder="описянье"
+                          style="min-width: 900px;max-width: 900px; min-height: 200px;"></textarea>
             </div>
         </div>
     </main>
-    <script type="text/javascript" src="/js/sliderCore.js"></script>
+</form>
+<script type="text/javascript" src="/js/showInputImages.js"></script>
 </body>
 
 </html>
