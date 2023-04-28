@@ -11,110 +11,131 @@
 </head>
 
 <body>
-    <header>
-        <div class="logo">
-            <a href="/">
-                <span>G</span>enesis
-            </a>
-        </div>
-        <div class="header_background" id="querySelectorByClass"></div>
-        <details>
-            <summary></summary>
-            <nav class="menu">
-                <a href="/">Home</a>
-                <% try{%>
-                    <% if (logged){%>
-                        <a href="./profile">Profile</a>
-                        <%} else{%>
-                            <a href="./login">Sign In</a>
-                            <%}%>
-                                <%} catch{%>
-                                    <a href="./login">Sign In</a>
-                                    <%}%>
-                                        <% if (user !==undefined && user.accountType>= 1) { %>
-                                            <a href="./moderator_page">Moderation</a>
-                                            <% } %>
-                                                <a href="./catalog">Catalog</a>
-                                                <% if (logged){%>
-                                                    <a>
-                                                <form action="/logout?_method=DELETE" method="POST">
-                                                    <button type="submit" class="exit_button">Exit</button>
-                                                </form>
-                                            </a>
-                                            <%} else{%>
-                                                <%}%>
-            </nav>
-        </details>
-    </header>
-    <main>
-        <div class="page_block">
-            <div class="add_img_info">
-                <div class="slider">
-                    <a class="prev" onclick="minusSlide()">&#10094;</a>
-                    <a class="next" onclick="plusSlide()">&#10095;</a>
-                    <% for (var key in item.images) {
-                       var image = item.images[key]; %>
-                        <div class="item">
-                            <img
-                                src="data:<%= image.mimetype %>;base64,<%= image.buffer.toString('base64') %>"
-                            />
-                        </div>
-                    <% } %>
+<header>
+    <div class="logo">
+        <a href="/">
+            <span>G</span>enesis
+        </a>
+    </div>
+    <div class="header_background" id="querySelectorByClass"></div>
+    <details>
+        <summary></summary>
+        <nav class="menu">
+            <a href="/">Home</a>
+            <% try{ %>
+                <% if (logged){ %>
+                    <a href="./profile">Profile</a>
+                <% } else{ %>
+                    <a href="./login">Sign In</a>
+                <% } %>
+            <% } catch{ %>
+                <a href="./login">Sign In</a>
+            <% } %>
+            <% if (user !== undefined && user.accountType >= 1) { %>
+                <a href="./moderator_page">Moderation</a>
+            <% } %>
+            <a href="./catalog">Catalog</a>
+            <% if (logged){ %>
+                <a>
+                    <form action="/logout?_method=DELETE" method="POST">
+                        <button type="submit" class="exit_button">Exit</button>
+                    </form>
+                </a>
+            <% } else{ %>
+            <% } %>
+        </nav>
+    </details>
+</header>
+<main>
+    <div class="page_block">
+        <div class="add_img_info">
+            <div class="slider">
+                <a class="prev" onclick="minusSlide()">&#10094;</a>
+                <a class="next" onclick="plusSlide()">&#10095;</a>
+                <% for (var key in item.images) {
+                    var image = item.images[key]; %>
+                <div class="item">
+                    <img
+                            src="data:<%= image.mimetype %>;base64,<%= image.buffer.toString('base64') %>"
+                    />
                 </div>
-                <div class="page_info">
-                    <div class="name">
-                        <p><%= item.title %></p>
+                <% } %>
+            </div>
+            <div class="page_info">
+                <div class="name">
+                    <p><%= item.title %></p>
+                </div>
+                <div class="seller">
+                    <img>
+                    <p class="seller_name">
+                        <%= item.sellerName %>
+                    </p>
+                </div>
+                <div class="buttons">
+                    <div class="normal_buttons">
+                        <button>
+                            <p>Message</p>
+                        </button>
+                        <button>
+                            <p>Call</p>
+                        </button>
                     </div>
-                    <div class="seller">
-                        <img>
-                        <p class="seller_name">
-                            <%= item.sellerName %>
-                        </p>
-                    </div>
-                    <div class="buttons">
-                        <div class="normal_buttons">
+                    <% if (user !== undefined && user.accountType >= 1) { %>
+                        <div class="moderator_buttons">
                             <button>
-                                <p>Message</p>
+                                <p>Manage</p>
                             </button>
-                            <button>
-                                <p>Call</p>
+                            <button
+                                    onclick="document.querySelector('#form').classList.remove('hidden');
+                                             document.querySelector('.blurBG').classList.remove('hidden');"
+                            >
+                                <p>Delete</p>
                             </button>
                         </div>
-                        <% if (user !==undefined && user.accountType>= 1) { %>
-                            <div class="moderator_buttons">
-                                <button>
-                                    <p>Manage</p>
-                                </button>
-                                <button>
-                                    <p>Delete</p>
+                        <form method="post" action="/item_page?_method=DELETE&_id=<%= item._id %>">
+
+                            <div class="blurBG hidden" onclick="document.querySelector('#form').classList.add('hidden');
+                                                                document.querySelector('.blurBG').classList.add('hidden');">
+                            </div>
+
+                            <div id="form" class="delete_form hidden">
+                                <h1 style="width: 100%">Are you sure?</h1>
+
+                                <button type="submit">Yes, delete.</button>
+
+                                <button type="button" onclick="document.querySelector('#form').classList.add('hidden');
+                                                               document.querySelector('.blurBG').classList.add('hidden');"
+                                >
+                                    No, close this window.
                                 </button>
                             </div>
-                            <% } %>
+                        </form>
+                    <% } %>
+                </div>
+                <div class="stats">
+                    <div class="main_info">
+                        <p>Square</p>
+                        <p>Floor</p>
+                        <p>Floor count</p>
+                        <p>Repair</p>
+                        <p>Price</p>
                     </div>
-                    <div class="stats">
-                        <div class="main_info">
-                            <p>Square</p>
-                            <p>Floor</p>
-                            <p>Floor count</p>
-                            <p>Repair</p>
-                            <p>Price</p>
-                        </div>
-                        <div class="main_info_stats">
-                            <p><%= item.square %><span>m²</span></p>
-                            <p><%= item.floor %></p>
-                            <p><%= item.floorCount %></p>
-                            <p><%= item.repair %></p>
-                            <p><%= item.price %><span>$</span></p>
-                        </div>
+                    <div class="main_info_stats">
+                        <p><%= item.square %><span>m²</span></p>
+                        <p><%= item.floor %></p>
+                        <p><%= item.floorCount %></p>
+                        <p><%= item.repair %></p>
+                        <p><%= item.price %><span>$</span></p>
                     </div>
                 </div>
             </div>
-            <div class="discription">
-                <p><%= item.description %></p>
-            </div>
         </div>
-    </main>
-    <script type="text/javascript" src="/js/sliderCore.js"></script>
+        <div class="discription">
+            <p><%= item.description %></p>
+        </div>
+    </div>
+</main>
+<script type="text/javascript" src="/js/sliderCore.js"></script>
 </body>
 
 </html>

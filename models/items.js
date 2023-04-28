@@ -53,7 +53,10 @@ const item = new mongoose.Schema({
         type: Object,
         required: false,
         unique: false,
-        default: { mimetype: null, buffer: null }
+        default: {
+            mimetype: { type: String, default: "" },
+            buffer: { type: Blob, default: null }
+        }
     },
     images: {
         type: Array,

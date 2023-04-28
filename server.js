@@ -33,7 +33,8 @@ app.set('view-engine', 'ejs')
 app.set('views', 'views')
 
 app.use(fileUpload({
-    createParentPath: true
+    createParentPath: true,
+    useTempFiles: true
 }))
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(flash())
@@ -64,8 +65,9 @@ async function start() {
         // Запуск службы mongodb если она не запущена
         if (process.platform === 'win32') {
             try {
-                await execSync('net start mongodb', { stdio: 'pipe' })
-            } catch {}
+                await execSync('net start mongodb', {stdio: 'pipe'})
+            } catch {
+            }
         }
 
         console.log('Подключение к базе данных...')
@@ -118,8 +120,8 @@ app.route('/addItem')
 
             if (body.title && body.sellerName) {
 
-                const encodedImages = await encodeImages(req)
-                console.log(encodedImages)
+                const encodedImages = await uploadImagesToDB(req)
+
                 const item = new Items({
                     title: body.title,
                     sellerName: body.sellerName,
@@ -128,7 +130,7 @@ app.route('/addItem')
                     floorCount: body.floorCount,
                     price: body.price,
                     description: body.description,
-                    firstImage: encodedImages[0] ?? { mimetype: null, buffer: null },
+                    firstImage: encodedImages[0] ?? {mimetype: null, buffer: null},
                     images: encodedImages,
                     created: Date.now()
                 })
@@ -175,33 +177,54 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
 
 })
 
-app.get('/item_page', async (req, res) => {
+app.route('/item_page')
+    .get(async (req, res) => {
 
-    await RequestTryCatch(req, res, async () => {
-        const _id = req.query._id
-        if (_id === null) {
-            throw new Error("Не указан параметр _id.")
-        }
+        await RequestTryCatch(req, res, async () => {
+            const _id = req.query._id
+            if (_id === null) {
+                throw new Error("Не указан параметр _id.")
+            }
 
-        const item = await Items.findOne({_id: _id})
-        if (!item) {
-            throw new Error("Не найден item.")
-        }
+            const item = await Items.findOne({_id: _id})
+            if (!item) {
+                throw new Error("Не найден item.")
+            }
 
-        const session = await GetUser(req);
-        res.render('item_page.ejs', {
-            logged: session.logged,
-            user: session.user,
-            item
+            const session = await GetUser(req);
+            res.render('item_page.ejs', {
+                logged: session.logged,
+                user: session.user,
+                item
+            })
         })
+
+    })
+    .delete(async (req, res) => {
+
+        await RequestTryCatch(req, res, async () => {
+            const _id = req.query._id
+            if (_id === null) {
+                throw new Error("Не указан параметр _id.")
+            }
+
+            Items.findOneAndDelete({_id: _id})
+                .then(() => {
+                    res.redirect('/moderator_page')
+                })
+                .catch((e) => {
+                    throw new Error(e)
+                })
+
+        })
+
     })
 
-})
 
 app.get('/moderator_page', checkModerator, async (req, res) => {
 
     await RequestTryCatch(req, res, async () => {
-        const items = await Items.find({}, { images: 0, __v: 0 })
+        const items = await Items.find({}, {images: 0, __v: 0})
         const session = await GetUser(req);
         res.render('moderator_page.ejs', {
             logged: session.logged,
@@ -212,14 +235,10 @@ app.get('/moderator_page', checkModerator, async (req, res) => {
 
 })
 
-app.post('/moderator_page', checkModerator, async (req, res) => {
-    throw new Error('Еще не сделано')
-})
-
 app.get('/catalog', async (req, res) => {
 
     await RequestTryCatch(req, res, async () => {
-        const items = await Items.find({}, { images: 0, __v: 0 })
+        const items = await Items.find({}, {images: 0, __v: 0})
         const session = await GetUser(req);
         res.render('catalog.ejs', {
             logged: session.logged,
@@ -261,14 +280,14 @@ app.post('/sendform', checkAuthenticated, async (req, res) => {
 // FUNCTIONS //
 
 async function RequestTryCatch(req, res, cb = async () => {
-}, redirectURL = null) {
+}, redirectURL = '/') {
     try {
         await cb();
     } catch (e) {
         console.error(e);
         const secs = 3;
-        const text = `<h1>Произошла ошибка при выполнении запроса!<br>Вы будете перенаправлены на главную страницу через ${secs} секунды.</h1>
-                      <script type="text/javascript"> setTimeout(() => { window.location.replace('/') }, ${ secs * 1000 }) </script>`
+        const text = `<h1>Произошла ошибка при выполнении запроса!<br>Вы будете перенаправлены на ${redirectURL === '/' || null ? 'главную страницу' : redirectURL} через ${secs} секунды.</h1>
+                      <script type="text/javascript"> setTimeout(() => { window.location.replace('${redirectURL}') }, ${secs * 1000}) </script>`
 
         res.set('Content-Type', 'text/html')
         res.send(Buffer.from(text))
@@ -345,31 +364,41 @@ app.delete('/logout', async (req, res) => {
     res.redirect('/')
 })
 
-async function encodeImages(req) {
+async function uploadImagesToDB(req) {
+    const tempPathsToUnlink = []
     const images = []
-
+    let image;
     if (req.files && req.files.images) {
-        for (const key in req.files.images) {
-            let image;
-            if (req.files.images.length === undefined) {
-                image = req.files.images
-            } else {
-                image = req.files.images[key]
-            }
-
+        for (let key in req.files.images) {
             try {
-                // скип фотки если вес больше 4мб (или 5 не помню пох)
+                const oneFile = req.files.images.md5 !== undefined
+
+                image = oneFile
+                    ? req.files.images
+                    : req.files.images[key]
+
                 const acceptedMimetypes = ['image/png', 'image/jpg', 'image/jpeg', 'image/bmp', 'image/gif']
-                if (image.size > 16000000 || !acceptedMimetypes.includes(image.mimetype)) {
+                if (image.size > 16000000 /* 16МБ */ || !acceptedMimetypes.includes(image.mimetype)) {
                     continue
                 }
+
                 images.push({
                     mimetype: image.mimetype,
-                    buffer: new Buffer.from(image.data, 'base64')
+                    buffer: fs.readFileSync(image.tempFilePath)
                 })
+
+                if (oneFile)
+                    break;
+
             } catch (e) {
                 console.error(e)
+            } finally {
+                tempPathsToUnlink.push(image.tempFilePath)
             }
+        }
+
+        for (let path of tempPathsToUnlink) {
+            fs.unlink(path, () => {})
         }
     }
 
