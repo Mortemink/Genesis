@@ -23,6 +23,7 @@ const execSync = require('child_process').execSync
 const MongoURL = `mongodb://127.0.0.1:27017/Genesis`
 
 const initializePassport = require('./passport-config')
+const {query} = require("express");
 initializePassport(
     passport,
     email => Users.findOne({email: email}),
@@ -108,42 +109,6 @@ app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
     failureRedirect: '/login',
     failureFlash: true,
 }))
-
-app.route('/addItem')
-    .get(checkModerator, async (req, res) => {
-        res.render('add_item.ejs', await GetUser(req))
-    })
-    .post(checkModerator, async (req, res) => {
-
-        await RequestTryCatch(req, res, async () => {
-            const body = await req.body
-
-            if (body.title && body.sellerName) {
-
-                const encodedImages = await uploadImagesToDB(req)
-
-                const item = new Items({
-                    title: body.title,
-                    sellerName: body.sellerName,
-                    square: body.square,
-                    floor: body.floor,
-                    floorCount: body.floorCount,
-                    price: body.price,
-                    description: body.description,
-                    firstImage: encodedImages[0] ?? {mimetype: null, buffer: null},
-                    images: encodedImages,
-                    created: Date.now()
-                })
-
-                await item.save()
-
-                res.redirect('/moderator_page?good=true')
-            } else {
-                throw new Error('Не удалось сохранить новое объявление!')
-            }
-        }, '/moderator_page?good=false')
-
-    })
 
 
 app.get('/register', checkNotAuthenticated, (req, res) => {
@@ -234,6 +199,96 @@ app.get('/moderator_page', checkModerator, async (req, res) => {
     })
 
 })
+
+app.route('/addItem')
+    .get(checkModerator, async (req, res) => {
+        const session = await GetUser(req)
+        res.render('add_item.ejs', {
+            logged: session.logged,
+            user: session.user,
+            item: undefined
+        })
+    })
+    .post(checkModerator, async (req, res) => {
+
+        await RequestTryCatch(req, res, async () => {
+            const body = await req.body
+
+            if (body.title && body.sellerName) {
+
+                const encodedImages = await uploadImagesToDB(req.files)
+
+                const item = new Items({
+                    title: body.title,
+                    sellerName: body.sellerName,
+                    square: body.square,
+                    floor: body.floor,
+                    floorCount: body.floorCount,
+                    price: body.price,
+                    description: body.description,
+                    firstImage: encodedImages[0] ?? {mimetype: null, buffer: null},
+                    images: encodedImages,
+                    created: Date.now()
+                })
+
+                await item.save()
+
+                res.redirect('/moderator_page?good=true')
+            } else {
+                throw new Error('Не удалось сохранить новое объявление!')
+            }
+        }, '/moderator_page?good=false')
+
+    })
+
+
+app.route('/editItem')
+    .get(checkModerator, async (req, res) => {
+
+        await RequestTryCatch(req, res, async () => {
+            const id = req.query._id
+            const item = await Items.findOne({_id: id})
+            if (item) {
+                const session = await GetUser(req)
+                res.render('add_item.ejs', {
+                    logged: session.logged,
+                    user: session.user,
+                    item
+                })
+            } else {
+                throw new Error('Не найдено объявление с данным id.')
+            }
+        })
+
+    })
+    .post(checkModerator, async (req, res) => {
+
+        await RequestTryCatch(req, res, async () => {
+            const body = await req.body
+
+            if (body.title && body.sellerName) {
+                const encodedImages = await uploadImagesToDB(req.files)
+                console.log(encodedImages)
+                await Items.findOneAndUpdate({_id: req.query._id},{
+                    title: body.title,
+                    sellerName: body.sellerName,
+                    square: body.square,
+                    floor: body.floor,
+                    floorCount: body.floorCount,
+                    price: body.price,
+                    description: body.description,
+                    firstImage: encodedImages[0] ?? {mimetype: null, buffer: null},
+                    images: encodedImages,
+                    updatedAt: Date.now()
+                })
+
+                res.redirect('/moderator_page?good=true')
+            } else {
+                throw new Error('Не удалось сохранить измененное объявление!')
+            }
+        }, '/moderator_page?good=false')
+
+    })
 
 app.get('/catalog', async (req, res) => {
 
@@ -364,18 +419,18 @@ app.delete('/logout', async (req, res) => {
     res.redirect('/')
 })
 
-async function uploadImagesToDB(req) {
+async function uploadImagesToDB(reqFiles) {
     const tempPathsToUnlink = []
     const images = []
     let image;
-    if (req.files && req.files.images) {
-        for (let key in req.files.images) {
+    if (reqFiles && reqFiles.images) {
+        for (let key in reqFiles.images) {
             try {
-                const oneFile = req.files.images.md5 !== undefined
+                const oneFile = reqFiles.images.md5 !== undefined
 
                 image = oneFile
-                    ? req.files.images
-                    : req.files.images[key]
+                    ? reqFiles.images
+                    : reqFiles.images[key]
 
                 const acceptedMimetypes = ['image/png', 'image/jpg', 'image/jpeg', 'image/bmp', 'image/gif']
                 if (image.size > 16000000 /* 16МБ */ || !acceptedMimetypes.includes(image.mimetype)) {

@@ -21,29 +21,37 @@ async function previewImages(input = null) {
     loadingPanel.classList.remove('hidden')
     loadingPanel.style.animation = 'loadingPanel 2s ease-in-out infinite'
 
+
     let filesCount = document.getElementsByName('images')[0].files.length
     let finishedFiles = 0;
-    for (let file of document.getElementsByName('images')[0].files) {
+    for (let i = 0; i < document.getElementsByName('images')[0].files.length; i++) {
+        let file = document.getElementsByName('images')[0].files[i]
 
         let reader  = new FileReader();
 
         reader.onloadend = function () {
-            let div = document.createElement('div')
-            div.classList.add('item')
+            let interval = setInterval(() => {
+                if (finishedFiles === i) {
+                    let div = document.createElement('div')
+                    div.classList.add('item')
 
-            let img = document.createElement('img')
-            img.src = reader.result;
+                    let img = document.createElement('img')
+                    img.src = reader.result;
 
-            div.appendChild(img)
+                    div.appendChild(img)
 
-            document.querySelector('.slider').appendChild(div)
+                    document.querySelector('.slider').appendChild(div)
 
-            finishedFiles++;
+                    finishedFiles++;
+
+                    clearInterval(interval)
+                }
+            }, 50)
         }
 
         await reader.readAsDataURL(file);
-
     }
+
     let interval = setInterval(() => {
         if (finishedFiles === filesCount) {
             let script = document.createElement('script')

@@ -46,7 +46,11 @@
         </nav>
     </details>
 </header>
-<form action="/addItem" method="POST" enctype="multipart/form-data">
+<% if (item === undefined) { %>
+<form id="form" action="/addItem" method="POST" enctype="multipart/form-data">
+<% } else { %>
+<form id="form" action="/editItem?_id=<%= item._id %>" method="POST" enctype="multipart/form-data">
+<% } %>
     <main>
         <div class="page_block">
             <div class="add_img_info">
@@ -62,18 +66,21 @@
 
 
                         <input onchange="previewImages(this)" id="imagesInput" name="images" multiple type="file"
-                               class="hidden" accept=".png .jpg .jpeg .bmp .gif">
+                               class="hidden" accept=".png, .jpg, .jpeg, .bmp, .gif">
+
+
                     </div>
                 </label>
                 <div class="page_info">
                     <div class="name">
                         <textarea placeholder="Title" name="title" required
-                                  style="max-width: 315px; min-width: 315px; max-height: 119px;"></textarea>
+                                  style="max-width: 315px; min-width: 315px; max-height: 119px;"><%= item?.title %></textarea>
                     </div>
                     <div class="seller">
                         <img>
                         <p class="seller_name">
-                            <input type="text" name="sellerName" required placeholder="Имя продавана">
+                            <input type="text" name="sellerName" required placeholder="Имя продавана"
+                                   value="<%= item?.sellerName %>">
                         </p>
                     </div>
                     <div class="buttons">
@@ -82,7 +89,7 @@
                         <% if (user !== undefined && user.accountType >= 1) { %>
                             <div class="moderator_buttons">
                                 <button type="submit">
-                                    <p>Add</p>
+                                    <p><%= item !== undefined ? 'Save' : 'Add' %></p>
                                 </button>
                             </div>
                         <% } %>
@@ -96,26 +103,68 @@
                             <p>Price</p>
                         </div>
                         <div class="main_info_stats">
-                            <input name="square" required type="number" value="0">
-                            <input name="floor" required type="number" value="1">
-                            <input name="floorCount" required type="number" value="1">
-                            <select name="repair" required selected="Required">
+                            <input name="square" required type="number" value="<%= item?.square ?? '0' %>">
+                            <input name="floor" required type="number" value="<%= item?.floor ?? '1' %>">
+                            <input name="floorCount" required type="number" value="<%= item?.floorCount ?? '1' %>">
+                            <select name="repair" required selected="<%= item?.repair ?? 'Not required' %>">
                                 <option value="Required">Required</option>
                                 <option value="Not required">Not required</option>
                             </select>
-                            <input type="number" name="price" value="0" min="0">
+                            <input type="number" name="price" value="<%= item?.price ?? '0' %>" min="0">
                         </div>
                     </div>
                 </div>
             </div>
             <div class="discription">
                 <textarea name="description" required placeholder="описянье"
-                          style="min-width: 900px;max-width: 900px; min-height: 200px;"></textarea>
+                          style="min-width: 900px;max-width: 900px; min-height: 200px;"><%= item?.description %></textarea>
             </div>
         </div>
     </main>
 </form>
 <script type="text/javascript" src="/js/showInputImages.js"></script>
+
+<% if (item !== undefined && item.images.length > 0) { %>
+    <script type="text/javascript">
+
+        const imagesLength = <%= item.images.length %>;
+        let dataTransfer = new DataTransfer();
+
+        <% for (var key in item.images) { %>
+        {
+            const key = Number('<%= key %>')
+            const mimetype = '<%= item.images[key].mimetype %>'
+            const shortMimetype = mimetype.split('/')[1]
+            const base64Data = '<%= item.images[key].buffer.toString('base64') %>'
+            fetch(`data:${mimetype};base64,${base64Data}`)
+                .then(async response => {
+                    const blob = await response.blob()
+                    const arrBuf = await blob.arrayBuffer()
+                    let interval = setInterval(() => {
+                        if (dataTransfer.items.length === key) {
+                            dataTransfer.items.add( new File([arrBuf], `image-${key}.${shortMimetype}`,
+                                {
+                                    type: mimetype
+                                })
+                            )
+                            clearInterval(interval)
+                        }
+                    }, 50)
+                })
+        }
+        <% } %>
+
+        let interval = setInterval(() => {
+            if (imagesLength === dataTransfer.items.length) {
+                console.log(dataTransfer.files)
+                document.getElementsByName('images')[0].files = dataTransfer.files;
+                previewImages(document.getElementsByName('images')[0])
+                clearInterval(interval);
+            }
+        }, 50)
+    </script>
+<% } %>
+
 </body>
 
 </html>
