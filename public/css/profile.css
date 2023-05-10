@@ -85,7 +85,7 @@
 
   
 /* menu css */
-  
+
 details {
   z-index: 235235;
   position: absolute;
@@ -104,24 +104,30 @@ summary {
   user-select: none;
   outline: none;
   transition: transform 200ms ease-in-out 0s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+   
 }
 summary::before,
 summary::after {
-  position: static;
-  top: 0;
-  left: 0;
+  position: absolute;
+  
 }
 summary::before {
   content: "";
 }
 summary::after {
   font-family: Arial, Helvetica, sans-serif;
-  content: "III";
-  letter-spacing: -1px;
+  content: "| | |";
+  font-weight: bold;
+  position: absolute;
+  transform: rotate(90deg);
+  height: auto;
+  width: 30px;
+  letter-spacing: -2px;
 }
-summary:hover {
-  transform: scale(1.1);
-}
+
 summary::marker {
   font-size: 0;
 }
@@ -134,6 +140,9 @@ details[open] .menu {
 details[open] summary::before {
   font-family: Arial, Helvetica, sans-serif;
   content: "X";
+  font-weight: bold;
+  width: 11px;
+  height: 16px;
 }
 details[open] summary::after {
   content: "";
@@ -175,6 +184,7 @@ details[open] summary::after {
 
 details[open]::before {
   animation: fadeMe 300ms linear forwards all;
+ 
 }
 @keyframes menuAnim {
   0% {
@@ -192,7 +202,8 @@ details[open]::before {
     opacity: 0;
   }
 }
-  
+
+
 .exit_button{
   background-color: initial;
   color: white;
@@ -311,4 +322,21 @@ details[open]::before {
   display: flex;
   flex-direction: column;
   text-align: end;
+}
+
+.exit{
+  border: none;
+  background-color: initial;
+  color: #ffffff;
+  font-family: gaefontly;
+  padding: 5px 10px 5px 10px;
+  border-radius: 4px;
+  border: 1px solid #2b2b2b;
+  transition: 0.2s;
+  letter-spacing: 0.7px;
+}
+
+.exit:hover{
+  color: #de5555;
+  border: 1px solid #de5555;
 }

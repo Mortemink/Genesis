@@ -118,7 +118,6 @@ details {
   position: absolute;
   right: 70px;
 }
-
 summary {
   text-align: center;
   padding: 12px 10px;
@@ -132,50 +131,49 @@ summary {
   user-select: none;
   outline: none;
   transition: transform 200ms ease-in-out 0s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+   
 }
-
 summary::before,
 summary::after {
-  position: static;
-  top: 0;
-  left: 0;
+  position: absolute;
+  
 }
-
 summary::before {
   content: "";
 }
-
 summary::after {
   font-family: Arial, Helvetica, sans-serif;
-  content: "III";
-  letter-spacing: -1px;
-}
-
-summary:hover {
-  transform: scale(1.1);
+  content: "| | |";
+  font-weight: bold;
+  position: absolute;
+  transform: rotate(90deg);
+  height: auto;
+  width: 30px;
+  letter-spacing: -2px;
 }
 
 summary::marker {
   font-size: 0;
 }
-
 summary::-webkit-details-marker {
   display: none;
 }
-
 details[open] .menu {
   animation-name: menuAnim;
 }
-
 details[open] summary::before {
   font-family: Arial, Helvetica, sans-serif;
   content: "X";
+  font-weight: bold;
+  width: 11px;
+  height: 16px;
 }
-
 details[open] summary::after {
   content: "";
 }
-
 .menu {
   position: absolute;
   height: 0;
@@ -190,7 +188,6 @@ details[open] summary::after {
   animation: closeMenu 300ms ease-in-out forwards;
   right: 0px;
 }
-
 .menu a {
   padding: 12px 24px;
   margin: 0 16px;
@@ -201,11 +198,9 @@ details[open] summary::after {
   transition: 0.3s;
   font-family: Gaefontly;
 }
-
 .menu a:nth-of-type(1) {
   padding-top: 18px;
 }
-
 .menu a:nth-of-type(1) {
   padding-top: 18px;
 }
@@ -216,26 +211,34 @@ details[open] summary::after {
 
 details[open]::before {
   animation: fadeMe 300ms linear forwards all;
+ 
 }
-
 @keyframes menuAnim {
   0% {
     height: 0;
   }
-
   100% {
     height: auto;
   }
 }
-
 @keyframes fadeMe {
   0% {
     opacity: 0.4;
   }
-
   100% {
     opacity: 0;
   }
+}
+
+
+.exit_button{
+  background-color: initial;
+  color: white;
+  font-family: Gaefontly;
+  font-weight: 300;
+  font-size: 16px;
+  border: none;
+  width: 50px;
 }
 
 /* adds css */
