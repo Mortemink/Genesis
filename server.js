@@ -267,8 +267,9 @@ app.route('/editItem')
             const body = await req.body
 
             if (body.title && body.sellerName) {
+                
                 const encodedImages = await uploadImagesToDB(req.files)
-                console.log(encodedImages)
+
                 await Items.findOneAndUpdate({_id: req.query._id},{
                     title: body.title,
                     sellerName: body.sellerName,

@@ -156,7 +156,6 @@
 
         let interval = setInterval(() => {
             if (imagesLength === dataTransfer.items.length) {
-                console.log(dataTransfer.files)
                 document.getElementsByName('images')[0].files = dataTransfer.files;
                 previewImages(document.getElementsByName('images')[0])
                 clearInterval(interval);
