@@ -16,9 +16,9 @@ const Forms = require('./models/forms')
 const Items = require('./models/items')
 const fileUpload = require('express-fileupload')
 const methodOverride = require('method-override')
-const fs = require('fs')
-const path = require('path')
-const execSync = require('child_process').execSync
+const fs = require('node:fs')
+const path = require('node:path')
+const execSync = require('node:child_process').execSync
 
 const MongoURL = `mongodb://127.0.0.1:27017/Genesis`
 
@@ -267,7 +267,7 @@ app.route('/editItem')
             const body = await req.body
 
             if (body.title && body.sellerName) {
-                
+
                 const encodedImages = await uploadImagesToDB(req.files)
 
                 await Items.findOneAndUpdate({_id: req.query._id},{
@@ -308,6 +308,43 @@ app.get('/catalog', async (req, res) => {
 app.get('/profile', checkAuthenticated, async (req, res) => {
     try {
         res.render('profile.ejs', await GetUser(req))
+    } catch (e) {
+        console.error(e);
+    }
+})
+
+app.post('/save_profile_info', checkAuthenticated, async (req, res) => {
+    try {
+        const body = req.body
+        if (body.email || body.password) {
+            const session = await GetUser(req)
+
+            let needLogout = false;
+            let hashedPassword;
+            if (body.password) {
+                hashedPassword = await bcrypt.hashSync(body.password, 10)
+                await Users.findOneAndUpdate({_id: session.user._id}, {
+                    password: hashedPassword
+                });
+
+                needLogout = true;
+            }
+
+            if (body.email) {
+                await Users.findOneAndUpdate({_id: session.user._id}, {
+                    email: body.email
+                });
+            }
+
+            if (needLogout) {
+                await logout(req, res)
+            } else {
+                res.redirect('/profile');
+            }
+
+        } else {
+            res.redirect('/profile')
+        }
     } catch (e) {
         console.error(e);
     }
@@ -354,11 +391,12 @@ async function GetUser(req) {
     let user = await req.user;
     if (user === undefined) {
         user = {
+            _id: null,
             firstName: null,
             lastName: null,
             email: null,
             telephone: null,
-            accountType: null,
+            accountType: null
         }
     }
 
@@ -406,7 +444,7 @@ async function checkAdmin(req, res, next) {
     res.redirect('/')
 }
 
-app.delete('/logout', async (req, res) => {
+async function logout(req, res) {
     try {
         await req.logOut((e) => {
             if (e) {
@@ -418,6 +456,10 @@ app.delete('/logout', async (req, res) => {
     }
 
     res.redirect('/')
+}
+
+app.delete('/logout', async (req, res) => {
+    await logout(req, res)
 })
 
 async function uploadImagesToDB(reqFiles) {

@@ -1,65 +1,66 @@
 * {
-  margin: 0;
-  padding: 0;
-  -webkit-touch-callout: none; /* iOS Safari */
+    margin: 0;
+    padding: 0;
+    -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
-       -moz-user-select: none; /* Old versions of Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome, Edge, Opera and Firefox */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+                                     supported by Chrome, Edge, Opera and Firefox */
 }
 
 @font-face {
-	font-family: 'Russo One'; 
-	src: local('Font Name'),
-		url(/fonts/RussoOne-Regular.ttf); 
+    font-family: 'Russo One';
+    src: local('Font Name'),
+    url(/fonts/RussoOne-Regular.ttf);
 }
 
 @font-face {
-	font-family: 'Gaefontly'; 
-	src: local('Font Name'),
-		url(/fonts/Gaefontly.ttf); 
+    font-family: 'Gaefontly';
+    src: local('Font Name'),
+    url(/fonts/Gaefontly.ttf);
 }
-    
-  body {
+
+body {
     background-color: #2b2b2b;
     overflow: hidden;
-  }
+}
 
 
-  a{
+a {
     cursor: pointer;
-  }
-  
-  button{
+}
+
+button {
     cursor: pointer;
-  }
-   
-  A:link {
+}
+
+A:link {
     text-decoration: none;
     color: white;
-  }
-  
-  A:visited {
+}
+
+A:visited {
     text-decoration: none;
     color: white;
-  }
-  
-  A:active {
+}
+
+A:active {
     text-decoration: none;
     color: white;
-  }
-  
-  :active,
-  :hover,
-  :focus {
+}
+
+:active,
+:hover,
+:focus {
     outline: 0;
     outline-offset: 0;
-  }
+}
 
 
-  header {
+header {
     position: relative;
     height: 80px;
     width: 100%;
@@ -68,276 +69,290 @@
     z-index: 2;
     background-color: #272727;
     box-shadow: 0px 2px 14px #333333;
-  }
+}
 
-  .logo {
+.logo {
     color: white;
     position: absolute;
     font-size: 35px;
     font-family: russo one;
     font-weight: 200;
     left: 70px;
-  }
-  
-  .logo span {
-    color: #de5555;
-  }
+}
 
-  
+.logo span {
+    color: #de5555;
+}
+
+
 /* menu css */
 
 details {
-  z-index: 235235;
-  position: absolute;
-  right: 70px;
+    z-index: 235235;
+    position: absolute;
+    right: 70px;
 }
+
 summary {
-  text-align: center;
-  padding: 12px 10px;
-  width: 21px;
-  height: 17px;
-  background-color: #232323;
-  border: 2px solid #de5555;
-  border-radius: 4px;
-  color: #fff;
-  cursor: pointer;
-  user-select: none;
-  outline: none;
-  transition: transform 200ms ease-in-out 0s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-   
+    text-align: center;
+    padding: 12px 10px;
+    width: 21px;
+    height: 17px;
+    background-color: #232323;
+    border: 2px solid #de5555;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    user-select: none;
+    outline: none;
+    transition: transform 200ms ease-in-out 0s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
 }
+
 summary::before,
 summary::after {
-  position: absolute;
-  
+    position: absolute;
+
 }
+
 summary::before {
-  content: "";
+    content: "";
 }
+
 summary::after {
-  font-family: Arial, Helvetica, sans-serif;
-  content: "| | |";
-  font-weight: bold;
-  position: absolute;
-  transform: rotate(90deg);
-  height: auto;
-  width: 30px;
-  letter-spacing: -2px;
+    font-family: Arial, Helvetica, sans-serif;
+    content: "| | |";
+    font-weight: bold;
+    position: absolute;
+    transform: rotate(90deg);
+    height: auto;
+    width: 30px;
+    letter-spacing: -2px;
 }
 
 summary::marker {
-  font-size: 0;
+    font-size: 0;
 }
+
 summary::-webkit-details-marker {
-  display: none;
+    display: none;
 }
+
 details[open] .menu {
-  animation-name: menuAnim;
+    animation-name: menuAnim;
 }
+
 details[open] summary::before {
-  font-family: Arial, Helvetica, sans-serif;
-  content: "X";
-  font-weight: bold;
-  width: 11px;
-  height: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    content: "X";
+    font-weight: bold;
+    width: 11px;
+    height: 16px;
 }
+
 details[open] summary::after {
-  content: "";
+    content: "";
 }
+
 .menu {
-  position: absolute;
-  height: 0;
-  width: fit-content;
-  border-radius: 4px;
-  background-color: #232323;
-  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.2);
-  margin-top: 8px;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  animation: closeMenu 300ms ease-in-out forwards;
-  right: 0px;
+    position: absolute;
+    height: 0;
+    width: fit-content;
+    border-radius: 4px;
+    background-color: #232323;
+    box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.2);
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: closeMenu 300ms ease-in-out forwards;
+    right: 0px;
 }
+
 .menu a {
-  padding: 12px 24px;
-  margin: 0 16px;
-  color: #fff;
-  border-bottom: 2px solid #2b2b2b;
-  text-decoration: none;
-  text-align: center;
-  transition: 0.3s;
-  font-family: Gaefontly;
+    padding: 12px 24px;
+    margin: 0 16px;
+    color: #fff;
+    border-bottom: 2px solid #2b2b2b;
+    text-decoration: none;
+    text-align: center;
+    transition: 0.3s;
+    font-family: Gaefontly;
 }
+
 .menu a:nth-of-type(1) {
-  padding-top: 18px;
+    padding-top: 18px;
 }
+
 .menu a:nth-of-type(1) {
-  padding-top: 18px;
+    padding-top: 18px;
 }
 
 .menu a:hover {
-  border-bottom: 2px solid #de5555;
+    border-bottom: 2px solid #de5555;
 }
 
 details[open]::before {
-  animation: fadeMe 300ms linear forwards all;
- 
+    animation: fadeMe 300ms linear forwards all;
+
 }
+
 @keyframes menuAnim {
-  0% {
-    height: 0;
-  }
-  100% {
-    height: auto;
-  }
+    0% {
+        height: 0;
+    }
+    100% {
+        height: auto;
+    }
 }
+
 @keyframes fadeMe {
-  0% {
-    opacity: 0.4;
-  }
-  100% {
-    opacity: 0;
-  }
+    0% {
+        opacity: 0.4;
+    }
+    100% {
+        opacity: 0;
+    }
 }
 
 
-.exit_button{
-  background-color: initial;
-  color: white;
-  font-family: Gaefontly;
-  font-weight: 300;
-  font-size: 16px;
-  border: none;
-  width: 50px;
+.exit_button {
+    background-color: initial;
+    color: white;
+    font-family: Gaefontly;
+    font-weight: 300;
+    font-size: 16px;
+    border: none;
+    width: 50px;
 }
 
 
 /* profile css*/
 
 .profileMain {
-  height: 100vh;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .profileBlock {
-  position: absolute;
-  width: 480px;
-  height: 350px;
-  border: 2px solid #de5555;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  top: calc(50% - 175px);
+    position: absolute;
+    width: 480px;
+    height: 350px;
+    border: 2px solid #de5555;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    top: calc(50% - 175px);
 }
 
 .profileIMG {
-  position: relative;
-  width: 100%;
-  height: 120px;
-  display: flex;
-  align-items:  center;
-  justify-content: center;
+    position: relative;
+    width: 100%;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.profileIMG img{
-  height: 100px;
-  width: 100px;
-  background-color: #5f5f5f;
-  border-radius: 50%;
-  background-size: cover;
+.profileIMG img {
+    height: 100px;
+    width: 100px;
+    background-color: #5f5f5f;
+    border-radius: 50%;
+    background-size: cover;
 }
 
 .userInfo {
-  position: relative;
-  width: auto;
-  max-width: 480px;
-  height: 50px;
-  display: flex;
-  justify-content: center;
+    position: relative;
+    width: auto;
+    max-width: 480px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
 
 }
 
-.userInfo p{
-  font-size: 18px;
-  font-family: gaefontly;
-  margin-left: 2px;
-  margin-right: 2px;  
-  color: white;
+.userInfo p {
+    font-size: 18px;
+    font-family: gaefontly;
+    margin-left: 2px;
+    margin-right: 2px;
+    color: white;
 }
 
-.infoChange{
-  margin-right: 20px;
-  font-size: 13px;
-  font-family: gaefontly;
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
+.infoChange {
+    margin-right: 20px;
+    font-size: 13px;
+    font-family: gaefontly;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
 }
 
-.infoChange form button{
-  background-color: initial;
-  border: none;
-  color: #5f5f5f;
-  transition: 0.1s;
+.infoChange button {
+    background-color: initial;
+    border: none;
+    color: #5f5f5f;
+    transition: 0.1s;
 }
 
 
-.infoChange form button:hover{
-  color: #de5555;
+.infoChange form button:hover {
+    color: #de5555;
 }
 
-.userStats{
-  
-  width: 95%;
-  height: 80px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  
-  
+.userStats {
+
+    width: 95%;
+    height: 80px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+
 }
 
-.userStats p{
-  font-size: 16px;
-  font-family: gaefontly;
-  margin-top: 6px;
-  color: white;
-  letter-spacing: 1px;
+.userStats p {
+    font-size: 16px;
+    font-family: gaefontly;
+    margin-top: 6px;
+    color: white;
+    letter-spacing: 1px;
 }
 
-.statsNaming{
-  width: 50%;
-  height: 80px;
-  display: flex;
-  flex-direction: column;
+.statsNaming {
+    width: 50%;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
 }
 
-.stats{
-  width: 50%;
-  height: 80px;
-  display: flex;
-  flex-direction: column;
-  text-align: end;
+.stats {
+    width: 50%;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    text-align: end;
 }
 
-.exit{
-  border: none;
-  background-color: initial;
-  color: #7c7c7c;
-  font-family: gaefontly;
-  padding: 5px 10px 5px 10px;
-  border-radius: 4px;
-  transition: 0.2s;
-  letter-spacing: 0.7px;
+.exit {
+    border: none;
+    background-color: initial;
+    color: #7c7c7c;
+    font-family: gaefontly;
+    padding: 5px 10px 5px 10px;
+    border-radius: 4px;
+    transition: 0.2s;
+    letter-spacing: 0.7px;
 }
 
-.exit:hover{
-  color: #de5555;
+.exit:hover {
+    color: #de5555;
 }
