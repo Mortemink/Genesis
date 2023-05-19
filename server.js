@@ -224,6 +224,7 @@ app.route('/addItem')
                     square: body.square,
                     floor: body.floor,
                     floorCount: body.floorCount,
+                    address: body.address,
                     price: body.price,
                     description: body.description,
                     firstImage: encodedImages[0] ?? {mimetype: null, buffer: null},

@@ -37,6 +37,12 @@ const item = new mongoose.Schema({
         unique: false,
         default: 'Not required'
     },
+    address: {
+        type: String,
+        required: true,
+        unique: false,
+        default: 'Address not set.'
+    },
     price: {
         type: Number,
         required: true,
