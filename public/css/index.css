@@ -196,14 +196,15 @@ ul li button {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  box-shadow: 0px 16px 20px 0px rgba(0, 0, 0, 0.2)
 }
 
 .secondBG p {
   color: white;
-  font-size: 63px;
-  font-family: Georgia;
-  font-weight: 500;
-  letter-spacing: -3px;
+  font-size: 58px;
+  font-family: gaefontly;
+  font-weight: 100;
+  letter-spacing: -1px;
 }
 
 .secondBG img {
@@ -211,6 +212,7 @@ ul li button {
 }
 
 .thirdBG {
+  background-color: #232323;
   position: relative;
   height: 880px;
   width: 100%;
@@ -376,6 +378,7 @@ ul li button {
   display: flex;
   align-items: center;
   flex-direction: row;
+  box-shadow: 0px -16px 20px 0px rgba(0, 0, 0, 0.2)
 }
 
 .fourthBG form {
@@ -404,9 +407,10 @@ ul li button {
 
 .service {
   font-size: 34px;
-  font-family: Georgia;
-  font-weight: 600;
+  font-family: gaefontly;
+  letter-spacing: 1px;
   position: absolute;
+  font-weight: 100;
   top: 150px;
   color: #ffffff;
   left: 6%;
@@ -414,7 +418,7 @@ ul li button {
 
 .service span {
   font-size: 60px;
-  font-family: Georgia;
+  font-family: gaefontly;
   font-weight: 700;
   color: #de5555;
   left: 20%;
@@ -524,6 +528,7 @@ ul li button {
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5)
 }
 
 
@@ -746,6 +751,8 @@ details[open] summary::after {
   text-align: center;
   transition: 0.3s;
   font-family: Gaefontly;
+  font-weight: 100;
+  letter-spacing: 1px;
 }
 .menu a:nth-of-type(1) {
   padding-top: 18px;

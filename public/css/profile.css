@@ -304,12 +304,11 @@ details[open]::before {
 }
 
 
-.infoChange form button:hover {
+.infoChange button:hover {
     color: #de5555;
 }
 
 .userStats {
-
     width: 95%;
     height: 80px;
     display: flex;
