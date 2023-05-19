@@ -255,8 +255,6 @@ details[open]::before {
 
 .item {
   position: relative;
-  width: 350px;
-  height: 450px;
   border: 2px solid #de5555;
   border-radius: 2%;
   width: 350px;
@@ -268,13 +266,12 @@ details[open]::before {
   align-items: center;
   margin-bottom: 20px;
   margin-left: 20px;
-  object-fit: cover;
   overflow: hidden;
 }
 
 .info {
   bottom: 0;
-  width: 450px;
+  width: 350px;
   height: 200px;
   z-index: 515;
   position: absolute;

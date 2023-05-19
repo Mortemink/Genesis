@@ -79,7 +79,7 @@
                     <div class="seller">
                         <img>
                         <p class="seller_name">
-                            <input type="text" name="sellerName" required placeholder="Имя продавана"
+                            <input type="text" name="sellerName" required placeholder="Seller name"
                                    value="<%= item?.sellerName %>">
                         </p>
                     </div>
@@ -100,6 +100,7 @@
                             <p>Floor</p>
                             <p>Floor count</p>
                             <p>Repair</p>
+                            <p>Adress</p>
                             <p>Price</p>
                         </div>
                         <div class="main_info_stats">
@@ -110,13 +111,14 @@
                                 <option value="Required">Required</option>
                                 <option value="Not required">Not required</option>
                             </select>
+                            <input name="adress" required type="text" value="<%= item?.adress ?? '' %>">
                             <input type="number" name="price" value="<%= item?.price ?? '0' %>" min="0">
                         </div>
                     </div>
                 </div>
             </div>
             <div class="discription">
-                <textarea name="description" required placeholder="описянье"
+                <textarea name="description" required placeholder="Discription"
                           style="min-width: 900px;max-width: 900px; min-height: 200px;"><%= item?.description %></textarea>
             </div>
         </div>
