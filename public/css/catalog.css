@@ -94,21 +94,26 @@ main {
 }
 
 .add_objective {
-  position: absolute;
-  left: calc(50% - 75px);
+  position: relative;
+  left: calc(50% - 120px);
   background-color: initial;
-  width: 150px;
-  height: 35px;
+  width: 240px;
+  height: 38px;
+  padding: 4px 6px 4px 6px;
   border: 1px solid #de5555;
   border-radius: 12px;
   cursor: pointer;
   color: white;
   font-family: gaefontly;
   font-size: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  text-align: center;
 }
+
+.add_objective option{
+  background-color: #232323;
+  font-size: 16px;
+}
+
 
 /* menu css */
 

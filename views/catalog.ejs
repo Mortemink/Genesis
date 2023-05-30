@@ -13,78 +13,80 @@
 </head>
 
 <body>
-<header>
-    <div class="logo">
-        <a href="/">
-            <span>G</span>enesis
-        </a>
-    </div>
+    <header>
+        <div class="logo">
+            <a href="/">
+                <span>G</span>enesis
+            </a>
+        </div>
+        <select class="add_objective">
+            <option><p>New</p></option>
+            <option><p>From lowest price</p></option>
+            <option><p>From highest price</p></option>
+        </select>
 
-    <button class="add_objective"> Sort by</button>
-    <div class="header_background" id="querySelectorByClass"></div>
-    <details>
-        <summary></summary>
-        <nav class="menu">
-            <a href="/">Home</a>
-            <% try{ %>
-                <% if (logged){ %>
-                    <a href="./profile">Profile</a>
-                <% } else{ %>
-                    <a href="./login">Sign In</a>
-                <% } %>
-            <% } catch{ %>
-                <a href="./login">Sign In</a>
-            <% } %>
-            <% if (user !== undefined && user.accountType >= 1) { %>
-                <a href="./moderator_page">Moderation</a>
-            <% } %>
-            <a href="./catalog">Catalog</a>
-            <% if (logged){ %>
-                <a>
-                    <form action="/logout?_method=DELETE" method="POST">
-                        <button type="submit" class="exit_button">Exit</button>
-                    </form>
+        <div class="header_background" id="querySelectorByClass"></div>
+        <details>
+            <summary></summary>
+            <nav class="menu">
+                <a href="/">Home</a>
+                <% try{ %>
+                    <% if (logged){ %>
+                        <a href="./profile">Profile</a>
+                        <% } else{ %>
+                            <a href="./login">Sign In</a>
+                            <% } %>
+                                <% } catch{ %>
+                                    <a href="./login">Sign In</a>
+                                    <% } %>
+                                        <% if (user !==undefined && user.accountType>= 1) { %>
+                                            <a href="./moderator_page">Moderation</a>
+                                            <% } %>
+                                                <a href="./catalog">Catalog</a>
+                                                <% if (logged){ %>
+                                                    <a>
+                                                        <form action="/logout?_method=DELETE" method="POST">
+                                                            <button type="submit" class="exit_button">Exit</button>
+                                                        </form>
+                                                    </a>
+                                                    <% } else{ %>
+                                                        <% } %>
+
+            </nav>
+        </details>
+    </header>
+    <main>
+        <div class="item_list">
+
+            <% for (var key in items) { var item=items[key]; var image=items[key].firstImage; %>
+
+                <a href="/item_page?_id=<%= item._id %>">
+                    <div class="item">
+                        <div class="info">
+                            <p class="Titile" style="margin-top: 0;">
+                                <%= item.title %>
+                            </p>
+                            <p style="margin-top:12px;">17 Kathleen Drive, Syosset, NY 11791</p>
+                            <p>One-room apartmet </p>
+                            <p>Build in: 2013</p>
+                            <p>Natural gas, hot water</p>
+                            <p>Square Feet: <%= item.square %>
+                            </p>
+                            <p>Price: <%= item.price %>$</p>
+                        </div>
+                        <img <% if (image.mimetype !==null) { %>
+                        src="data:<%= image.mimetype %>;base64,<%= image.buffer.toString('base64') %>"
+                                <% } else { %>
+                                    src="./img/nophoto.png"
+                                    <% } %>
+                                        />
+                    </div>
                 </a>
-            <% } else{ %>
-            <% } %>
 
-        </nav>
-    </details>
-</header>
-<main>
-    <div class="item_list">
-
-        <%
-        for (var key in items) {
-            var item = items[key];
-            var image = items[key].firstImage;
-        %>
-
-        <a href="/item_page?_id=<%= item._id %>">
-            <div class="item">
-                <div class="info">
-                    <p class="Titile" style="margin-top: 0;"><%= item.title %></p>
-                    <p style="margin-top:12px;">17 Kathleen Drive, Syosset, NY 11791</p>
-                    <p>One-room apartmet </p>
-                    <p>Build in: 2013</p>
-                    <p>Natural gas, hot water</p>
-                    <p>Square Feet: <%= item.square %></p>
-                    <p>Price: <%= item.price %>$</p>
-                </div>
-                <img
-                <% if (image.mimetype !== null) { %>
-                    src="data:<%= image.mimetype %>;base64,<%= image.buffer.toString('base64') %>"
-                <% } else { %>
-                    src="./img/nophoto.png"
                 <% } %>
-                />
-            </div>
-        </a>
 
-        <% } %>
-
-    </div>
-</main>
+        </div>
+    </main>
 </body>
 
 </html>

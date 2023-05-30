@@ -78,8 +78,9 @@ header{
   }
 
 .mainBG_img {
-  position: relative;
+  position: absolute;
   width: 100%;
+  z-index: 0;
 }
 
 .headerlinks {
@@ -171,8 +172,8 @@ ul li button {
 
 .mainBG {
   width: 100%;
-  height: 800px;
-  position: absolute;
+  height: 968px;
+  position: relative;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -184,7 +185,9 @@ ul li button {
   color: white;
   font-size: 222px;
   font-family: Georgia;
+  position: relative;
   font-weight: 700;
+  z-index: 3;
 }
 
 .secondBG {
@@ -383,10 +386,8 @@ ul li button {
 
 .fourthBG form {
   display: flex;
-  /* justify-content: center; */
   align-items: center;
   flex-direction: column;
-  position: relative;
   background-color: #232323;
   width: 650px;
   height: 750px;
@@ -394,6 +395,7 @@ ul li button {
   position: absolute;
   right: 12%;
   border: 2px solid #de5555;
+  box-shadow: 1px 1px 16px 2px rgba(0, 0, 0, 0.4)
 }
 
 .fillout {
